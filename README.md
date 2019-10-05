@@ -12,5 +12,8 @@ For client application just go to client folder and run command
 ng serve --open
 ```
 
-Make sure you have setup your mysql server
-There is also a sql script file which will help you to create the database.
+Make sure you have setup your mysql server and run the following command inside the sql server
+```
+show databases;
+create database BookExchange;
+```
