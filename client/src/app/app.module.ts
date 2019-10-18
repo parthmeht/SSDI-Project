@@ -11,12 +11,26 @@ import {MatButtonModule, MatCardModule, MatInputModule, MatListModule, MatToolba
 import { BookFormComponent } from './book-form/book-form.component';
 import {FormsModule} from '@angular/forms';
 import {BookService} from './service/book.service';
+import { LoginComponent } from './login/login.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
+import { HomeComponent } from './home/home.component';
+import { LayoutComponent } from './layout/layout.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BookListComponent,
-    BookFormComponent
+    BookFormComponent,
+    LoginComponent,
+    SignUpComponent,
+    UserProfileComponent,
+    HeaderComponent,
+    FooterComponent,
+    HomeComponent,
+    LayoutComponent
   ],
   imports: [
     BrowserModule,
@@ -33,4 +47,6 @@ import {BookService} from './service/book.service';
   providers: [BookService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  user = {FirstName: 'Michael', LastName: 'Pugh'}
+ }
