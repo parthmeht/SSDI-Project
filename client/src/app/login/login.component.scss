@@ -1,0 +1,84 @@
+.login{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    width:100vw;
+    height:100vh;
+    background-color:#DFE6E9;
+    .login-title{
+        color:#509e2f;
+        height: 6vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top:15vh;
+        .image-container{
+            width: 6vh;
+            margin: 1vh 0vw;
+            img{
+                max-height:7vh;
+                max-width:7vw;
+            }
+        }
+
+        h1{
+            margin-left:2vw;
+            font-size: 4.5vh;
+        }
+    }
+    .login-box{
+        margin-top:10vh;
+        height:40vh;
+        width:16vw;
+        background-color: #fff;
+        box-shadow: 0px 2px 5px #636E72;
+        min-width:300px;
+        min-height:300px;
+        display:flex;
+        flex-direction:column;
+        padding:5vh;
+        h2{
+            margin-top:0;
+            margin-bottom:5vh;
+            color:#509e2f;
+            font-size:2.5vh;
+            align-self:center;
+        }
+        label{
+            font-size:2vh;
+        }
+        .email, .password{
+            background-color:#DFE6E9;
+            width:300px;
+            outline:none;
+            height:30px;
+            font-size:1.5vh;
+            margin-bottom:4vh;
+            border:1px solid #636E72;
+        }
+            .submit{
+                align-self:center;
+                width:150px;
+                background-color: #509e2f;
+                cursor:pointer;
+                height: 50px;
+                border:1px solid #636E72;
+                color:#fff;
+                font-size:18px;
+                &:hover{
+                    box-shadow: 0px 2px 5px #636E72;
+                }
+            }
+        .new-here{
+            margin-top:auto;
+            display:flex;
+            margin-left:auto;
+            margin-right:auto;
+            a{
+                color:#509e2f;
+                text-decoration:underline;
+                margin-top:auto;
+            }
+        }
+    }
+}
