@@ -1,0 +1,35 @@
+.book{
+    display:flex;
+    border:1px solid #636E72;
+    background-color: #DFE6E9;
+    box-shadow:none;
+    border-radius:5px;
+    padding:1vh 1vw;
+    margin:.5vh;
+    font-size:1.5vh;
+    cursor:pointer;
+    &:hover{
+        box-shadow: 0px 2px 5px #636E72;
+    }
+    
+    .title-section{
+        width:45%;
+        i{
+            color:#333333;
+        }
+    }
+    .author-section{
+        width:35%;
+        i{
+            color:#333333;
+        }
+    }
+    .date-section{
+        width:20%;
+        display:flex;
+        i{
+            margin-left:auto;
+            color:#333333;
+        }
+    }
+}
