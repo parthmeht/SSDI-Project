@@ -18,6 +18,7 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
 import { LayoutComponent } from './layout/layout.component';
+import { BookComponent } from './book/book.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { LayoutComponent } from './layout/layout.component';
     HeaderComponent,
     FooterComponent,
     HomeComponent,
-    LayoutComponent
+    LayoutComponent,
+    BookComponent
   ],
   imports: [
     BrowserModule,

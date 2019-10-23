@@ -1,1 +1,33 @@
-<p>user-profile works!</p>
+<div class="profile">
+    <div class="top-bar">
+        <div class="info">
+            <div class="name">{{isMyProfile ? 'My ' : user.FirstName + '\'s'}} Profile</div>
+            <div class="email">mpugh6@uncc.edu</div>
+        </div>
+        <div class="contact">
+            <!--<button class="contact-button">Contact</button>-->
+        </div>
+    </div>
+    <div class="books">
+        <div class="book-collection">
+            <div class="header">
+                <div class="title">Your Book Collection</div>
+                <button class="add-button">Add</button>
+            </div>
+            <div class="container">
+                <div class="no-books" *ngIf="!bookCollection">No Books</div>
+                <app-book class="books" *ngFor="let book of bookCollection" [book]="book" [fullView]="true"></app-book>
+            </div>
+        </div>
+        <div class="interested-in">
+            <div class="header">
+                <div class="title">Books You Are Interested In</div>
+                <button class="add-button">Add</button>
+            </div>
+            <div class="container">
+                <div class="no-books" *ngIf="!booksInterestedIn">No Books</div>
+                <app-book class="books" *ngFor="let book of booksInterestedIn" [book]="book" [fullView]="true"></app-book>
+            </div>
+        </div>
+    </div>
+</div>

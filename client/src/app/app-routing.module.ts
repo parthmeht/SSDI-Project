@@ -18,7 +18,8 @@ const routes: Routes = [
   { path: 'books', component: BookListComponent },
   { path: 'addBook', component: BookFormComponent },
   { path: 'user', component: UserProfileComponent },
-  { path: 'user/:id', component: UserProfileComponent }
+  { path: 'user/:id', component: UserProfileComponent },
+  { path: 'book', component: BookFormComponent}
     ]
   },
   { path: 'login', component: LoginComponent},
