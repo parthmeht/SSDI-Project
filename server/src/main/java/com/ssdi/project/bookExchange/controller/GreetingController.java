@@ -1,5 +1,6 @@
-package com.ssdi.project.bookExchange;
+package com.ssdi.project.bookExchange.controller;
 
+import com.ssdi.project.bookExchange.model.Greeting;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;

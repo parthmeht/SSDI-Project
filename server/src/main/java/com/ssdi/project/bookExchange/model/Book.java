@@ -1,4 +1,4 @@
-package com.ssdi.project.bookExchange;
+package com.ssdi.project.bookExchange.model;
 
 import lombok.*;
 
