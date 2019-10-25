@@ -1,0 +1,14 @@
+<div class="search-result">
+    <span *ngIf="book" class="title-section">
+        <i class="fa fa-book"></i>&nbsp;
+        <span class="title">{{book.title}}</span>
+    </span>
+    <span *ngIf="book" class="author-section">
+        <i class="fa fa-user"></i>&nbsp;
+        <span class="author">{{book.author}}</span>
+    </span>
+    <span *ngIf="user" class="user-name">
+        <i class="fa fa-user"></i>&nbsp;
+        <span class="author">{{user.name + ' ' + user.lastName}}</span>
+    </span>
+</div>

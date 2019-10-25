@@ -6,10 +6,7 @@
             </div>
             <h1 class="title">UNC Charlotte Book Exchange</h1>    
         </a>
-        <div class="search">
-            <input type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Search for a book...">
-            <i class="fa fa-search  fa-2x"></i>
-        </div>
+        <app-search class="search"></app-search>
         <div class="user">
             <a href="/user" class="user-name">Welcome, Bob</a>
             <a href="" class="logout">Logout</a>
