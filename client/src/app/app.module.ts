@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -19,6 +20,7 @@ import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
 import { LayoutComponent } from './layout/layout.component';
 import { BookComponent } from './book/book.component';
+import { UserService } from './service/user.service';
 
 @NgModule({
   declarations: [
@@ -44,9 +46,13 @@ import { BookComponent } from './book/book.component';
     MatInputModule,
     MatListModule,
     MatToolbarModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
-  providers: [BookService],
+  providers: [
+    BookService,
+    UserService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
