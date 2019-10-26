@@ -8,4 +8,3 @@ export class User {
     active: boolean;
     phoneNumber: string;
 }
-  
