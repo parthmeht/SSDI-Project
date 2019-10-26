@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {User} from '../model/user';
 
@@ -8,11 +8,19 @@ export class UserService {
   private usersUrl: string;
 
   constructor(private http: HttpClient) {
-    this.usersUrl = 'http://localhost:8080/user/';
+    this.usersUrl = 'http://localhost:8080/';
   }
 
-  public login(): Observable<User> {
-    return this.http.get<User>(this.usersUrl + 'login');
+  public login(email: string, password: string) {
+    console.log(email + ' ' + password);
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/x-www-form-urlencoded',
+      })
+    };
+    return this.http.post(this.usersUrl + 'login', {
+      email, password
+    }, httpOptions);
   }
 
   public createNewUser(user: User) {

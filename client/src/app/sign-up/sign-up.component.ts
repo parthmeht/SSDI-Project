@@ -26,7 +26,7 @@ export class SignUpComponent implements OnInit {
     this.submitted = true;
     if (this.signUpForm.invalid) {
       return;
-    }else{
+    } else {
       this.user.name = this.signUpForm.controls.firstName.value;
       this.user.lastName = this.signUpForm.controls.lastName.value;
       this.user.email = this.signUpForm.controls.email.value;
@@ -34,7 +34,6 @@ export class SignUpComponent implements OnInit {
       this.user.password = this.signUpForm.controls.password.value;
       this.userService.createNewUser(this.user).subscribe(result => this.goHome());
     }
-    
   }
 
   goHome() {
