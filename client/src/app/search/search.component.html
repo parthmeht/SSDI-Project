@@ -1,0 +1,6 @@
+<div class="search">
+    <input type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Search..." type="search" (focus)="showResults = true"(focusout)="showResults = false" />
+</div>
+<div *ngIf="showResults && searchText && users" class="search-results-container">
+    <app-search-result *ngFor="let user of users" [user]="user"></app-search-result>
+</div>

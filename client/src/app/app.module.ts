@@ -21,6 +21,8 @@ import { HomeComponent } from './home/home.component';
 import { LayoutComponent } from './layout/layout.component';
 import { BookComponent } from './book/book.component';
 import { UserService } from './service/user.service';
+import { SearchComponent } from './search/search.component';
+import { SearchResultComponent } from './search-result/search-result.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import { UserService } from './service/user.service';
     FooterComponent,
     HomeComponent,
     LayoutComponent,
-    BookComponent
+    BookComponent,
+    SearchComponent,
+    SearchResultComponent
   ],
   imports: [
     BrowserModule,
