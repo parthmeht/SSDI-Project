@@ -7,13 +7,11 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 
@@ -42,7 +40,7 @@ public class LoginController {
     }*/
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public HashMap<String, Object> createNewUser(@Valid User user, BindingResult bindingResult) {
+    public HashMap<String, Object> createNewUser(@RequestBody User user, BindingResult bindingResult) {
         HashMap<String,Object> hm = new HashMap<>();
         User userExists = userService.findUserByEmail(user.getEmail());
         if (userExists != null) {
@@ -68,8 +66,8 @@ public class LoginController {
         return hm;
     }
 
-    @RequestMapping(value="/home", method = RequestMethod.GET)
-    public HashMap<String, Object> home(){
+    @RequestMapping(value="/user", method = RequestMethod.GET)
+    public HashMap<String, Object> home(HttpServletRequest request){
         HashMap<String,Object> hm = new HashMap<>();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByEmail(auth.getName());

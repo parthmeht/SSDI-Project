@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Router} from '@angular/router';
+import {UserService} from './service/user.service';
 
 @Component({
   selector: 'app-root',
@@ -7,8 +10,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title: string;
+  authenticated = false;
+  credentials = {email: '', password: ''};
 
-  constructor() {
+  constructor(private userService: UserService, private http: HttpClient, private router: Router) {
     this.title = 'Book Application';
+    this.userService.authenticate(this.credentials, undefined);
   }
 }

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {Book} from '../model/book';
 import {UserService} from '../service/user.service';
 import {User} from '../model/user';
+import {HttpClient} from '@angular/common/http';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -9,30 +11,18 @@ import {User} from '../model/user';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-
-  // email: string;
-  // password: string;
-  // user: User;
-  email;
-  password;
-  constructor(private userService: UserService) {
-    // his.user = new User();
-  }
+  credentials = {email: '', password: ''};
+  constructor(private userService: UserService, private http: HttpClient, private router: Router) {}
 
   ngOnInit() {
   }
 
-  onSubmit() {
-    this.userService.login(this.email, this.password).subscribe(
-      res => {
-        console.log(res);
-        return res;
-      },
-      error => {
-        console.log(error);
-        return error;
-      }
-    );
+ onSubmit() {
+    console.log(this.credentials);
+    this.userService.authenticate(this.credentials, () => {
+     this.router.navigateByUrl('/').then(r => console.log(r));
+   });
+    return false;
   }
 
 }

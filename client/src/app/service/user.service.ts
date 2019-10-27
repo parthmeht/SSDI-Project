@@ -6,6 +6,7 @@ import {User} from '../model/user';
 @Injectable()
 export class UserService {
   private usersUrl: string;
+  authenticated = false;
 
   constructor(private http: HttpClient) {
     this.usersUrl = 'http://localhost:8080/';
@@ -16,15 +17,31 @@ export class UserService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/x-www-form-urlencoded',
-      })
+        Authorization: 'Basic ' + btoa(email + ':' + password)
+  })
     };
-    return this.http.post(this.usersUrl + 'login', {
-      email, password
-    }, httpOptions);
+    return this.http.post(this.usersUrl + 'login', {}, httpOptions);
   }
 
   public createNewUser(user: User) {
     console.log(user);
     return this.http.post<User>(this.usersUrl + 'registration', user);
+  }
+
+  authenticate(credentials, callback) {
+    console.log(credentials);
+    this.http.get(this.usersUrl + 'user', {
+      headers: {
+        authorization: this.createBasicAuthToken(credentials.email, credentials.password)
+      }
+    }).subscribe(response => {
+      this.authenticated = !!response;
+      return callback && callback();
+    });
+
+  }
+
+  createBasicAuthToken(username: string, password: string) {
+    return 'Basic ' + window.btoa(username + ':' + password);
   }
 }
