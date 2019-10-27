@@ -6,4 +6,5 @@ export class User {
     lastName: string;
     active: bigint;
     phoneNumber: string;
+    authdata?: string;
 }

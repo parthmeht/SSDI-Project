@@ -1,15 +1,20 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {User} from '../model/user';
+import {map} from 'rxjs/operators';
 
 @Injectable()
 export class UserService {
   private usersUrl: string;
   authenticated = false;
+  public currentUser: Observable<User>;
+  private currentUserSubject: BehaviorSubject<User>;
 
   constructor(private http: HttpClient) {
     this.usersUrl = 'http://localhost:8080/';
+    this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
+    this.currentUser = this.currentUserSubject.asObservable();
   }
 
   public login(email: string, password: string) {
@@ -20,7 +25,7 @@ export class UserService {
         Authorization: 'Basic ' + btoa(email + ':' + password)
   })
     };
-    return this.http.post(this.usersUrl + 'login', {}, httpOptions);
+    return this.http.post(this.usersUrl + 'user', {}, httpOptions);
   }
 
   public createNewUser(user: User) {
@@ -28,17 +33,31 @@ export class UserService {
     return this.http.post<User>(this.usersUrl + 'registration', user);
   }
 
-  authenticate(credentials, callback) {
+  authenticate(credentials) {
     console.log(credentials);
-    this.http.get(this.usersUrl + 'user', {
+    return this.http.get(this.usersUrl + 'user', {
       headers: {
         authorization: this.createBasicAuthToken(credentials.email, credentials.password)
       }
-    }).subscribe(response => {
-      this.authenticated = !!response;
-      return callback && callback();
-    });
+    }).pipe(map(response => {
+      // store user details and basic auth credentials in local storage to keep user logged in between page refreshes
+      response.user.authdata = window.btoa(credentials.email + ':' + credentials.password);
+      localStorage.setItem('currentUser', JSON.stringify(response.user));
+      if (user instanceof User) {
+        this.currentUserSubject.next(response.user);
+      }
+      return user;
+    }));
+  }
 
+  public get currentUserValue(): User {
+    return this.currentUserSubject.value;
+  }
+
+  logout() {
+    // remove user from local storage to log user out
+    localStorage.removeItem('currentUser');
+    this.currentUserSubject.next(null);
   }
 
   createBasicAuthToken(username: string, password: string) {

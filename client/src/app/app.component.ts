@@ -15,6 +15,6 @@ export class AppComponent {
 
   constructor(private userService: UserService, private http: HttpClient, private router: Router) {
     this.title = 'Book Application';
-    this.userService.authenticate(this.credentials, undefined);
+    this.userService.authenticate(this.credentials);
   }
 }
