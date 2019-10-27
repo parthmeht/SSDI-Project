@@ -4,12 +4,12 @@
             <div class="image-container">
                 <img src="../../assets/images/books.png" />
             </div>
-            <h1 class="title">UNC Charlotte Book Exchange</h1>    
+            <h1 class="title">UNC Charlotte Book Exchange</h1>
         </a>
         <app-search class="search"></app-search>
         <div class="user">
             <a href="/user" class="user-name">Welcome, Bob</a>
-            <a href="" class="logout">Logout</a>
+            <a [routerLink]="" (click)="logout()" class="logout">Logout</a>
         </div>
     </div>
     <!-- placeholder for menu-->

@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {User} from '../model/user';
 import {map} from 'rxjs/operators';
+import {ActivatedRouteSnapshot, Router, RouterStateSnapshot} from '@angular/router';
 
 @Injectable()
 export class UserService {
@@ -11,7 +12,7 @@ export class UserService {
   public currentUser: Observable<User>;
   private currentUserSubject: BehaviorSubject<User>;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
     this.usersUrl = 'http://localhost:8080/';
     this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
     this.currentUser = this.currentUserSubject.asObservable();
@@ -43,10 +44,8 @@ export class UserService {
       // store user details and basic auth credentials in local storage to keep user logged in between page refreshes
       response.user.authdata = window.btoa(credentials.email + ':' + credentials.password);
       localStorage.setItem('currentUser', JSON.stringify(response.user));
-      if (user instanceof User) {
-        this.currentUserSubject.next(response.user);
-      }
-      return user;
+      this.currentUserSubject.next(response.user);
+      return response.user;
     }));
   }
 
@@ -58,6 +57,7 @@ export class UserService {
     // remove user from local storage to log user out
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
+    this.router.navigate(['/login']);
   }
 
   createBasicAuthToken(username: string, password: string) {
