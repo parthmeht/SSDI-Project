@@ -42,10 +42,13 @@ export class UserService {
       }
     }).pipe(map(response => {
       // store user details and basic auth credentials in local storage to keep user logged in between page refreshes
-      response.user.authdata = window.btoa(credentials.email + ':' + credentials.password);
-      localStorage.setItem('currentUser', JSON.stringify(response.user));
-      this.currentUserSubject.next(response.user);
-      return response.user;
+
+      //commenting out since it doesn't work
+      // response.user.authdata = window.btoa(credentials.email + ':' + credentials.password);
+      // localStorage.setItem('currentUser', JSON.stringify(response.user));
+      // this.currentUserSubject.next(response.user);
+      // return response.user;
+      return response;
     }));
   }
 
