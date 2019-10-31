@@ -40,8 +40,9 @@ export class UserService {
       headers: {
         authorization: this.createBasicAuthToken(credentials.email, credentials.password)
       }
-    }).pipe(map(response => {
+    }).pipe(map((response: any) => {
       // store user details and basic auth credentials in local storage to keep user logged in between page refreshes
+      console.log(response);
       response.user.authdata = window.btoa(credentials.email + ':' + credentials.password);
       localStorage.setItem('currentUser', JSON.stringify(response.user));
       this.currentUserSubject.next(response.user);

@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
  onSubmit() {
     console.log(this.credentials);
     this.userService.authenticate(this.credentials).subscribe(res => {
-      console.log(res);
+      console.log('Inside onSubmit response: ' + res.toString());
       this.router.navigateByUrl('/').then(r => console.log(r));
     });
     return false;
