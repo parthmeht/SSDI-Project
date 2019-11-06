@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
@@ -75,6 +76,18 @@ public class LoginController {
         hm.put("user",user);
         hm.put("status", String.valueOf(200));
         return hm;
+    }
+
+    @GetMapping("/allusers")
+    public List<User> findAllUsers(){
+        List<User> listUsers = userService.listAll();
+        return listUsers;
+    }
+    
+    @GetMapping("/users")
+    public List<User> findAll(@RequestParam Optional<String> name) {
+        List<User> listUsers = userService.findUserByName(name.orElse(" "));
+        return listUsers;
     }
 
 
