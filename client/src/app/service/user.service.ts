@@ -50,8 +50,17 @@ export class UserService {
     }));
   }
 
-  public get currentUserValue(): User {
+  currentUserValue(): User {
     return this.currentUserSubject.value;
+  }
+
+  getUserById(id: number): Observable<User> {
+    console.log('id: ' + id);
+    return this.http.get<User>(this.usersUrl + 'userById/' + id, { 
+      headers: {
+        authorization: this.currentUserSubject.value.authdata
+      }
+    });
   }
 
   logout() {

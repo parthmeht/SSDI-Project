@@ -6,9 +6,9 @@
             </div>
             <h1 class="title">UNC Charlotte Book Exchange</h1>
         </a>
-        <app-search class="search"></app-search>
+        <!--<app-search class="search"></app-search>-->
         <div class="user">
-            <a href="/user" class="user-name">Welcome, Bob</a>
+            <a href="/user" class="user-name">Welcome, {{user.name}}</a>
             <a [routerLink]="" (click)="logout()" class="logout">Logout</a>
         </div>
     </div>

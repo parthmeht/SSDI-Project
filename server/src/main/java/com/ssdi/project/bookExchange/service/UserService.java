@@ -45,9 +45,13 @@ public class UserService {
     public List<User> listAll(){
         return userRepository.findAll();
     }
-    
+
     public List<User> findUserByName(String name) {
         return userRepository.findByName(name);
+    }
+
+    public User getUserById(int id) {
+        return userRepository.getById(id);
     }
 
 }

@@ -90,5 +90,11 @@ public class LoginController {
         return listUsers;
     }
 
+    @GetMapping("/userById/{id}")
+    public User getUserById(@PathVariable int id) {
+        User user = userService.getUserById(id);
+        return user;
+    }
+
 
 }

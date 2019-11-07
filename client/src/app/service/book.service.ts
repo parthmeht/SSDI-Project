@@ -18,4 +18,8 @@ export class BookService {
   public save(book: Book) {
     return this.http.post<Book>(this.booksUrl + 'add-book', book);
   }
+
+  public search(query: String): Observable<Book[]> {
+    return this.http.get<Book[]>(this.booksUrl + 'search/' + query);
+  }
 }

@@ -7,10 +7,11 @@ import {UserService} from '../service/user.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-
+user: {};
   constructor(private userService: UserService) { }
 
   ngOnInit() {
+    this.user = this.userService.currentUserValue();
   }
 
   logout() {
