@@ -28,19 +28,20 @@ export class UserProfileComponent implements OnInit {
     });
     this.routeSub = this.route.params.subscribe(params => {
       console.log(params);
-      console.log(params['id']);
-      if(params && params.hasOwnProperty('id')){
-        this.userService.getUserById(params['id']).subscribe(data => {
+      console.log(params.id);
+      if (params && params.hasOwnProperty('id')) {
+        this.userService.getUserById(params.id).subscribe(data => {
           this.user = data;
         });
-      }else{
+      } else {
         this.isMyProfile = true;
         this.user = this.userService.currentUserValue();
       }
-    })
+    });
   }
 
-  ngOnDestrooy(){
+  // tslint:disable-next-line:use-lifecycle-interface
+  ngOnDestroy() {
     this.routeSub.unsubscribe();
   }
 }

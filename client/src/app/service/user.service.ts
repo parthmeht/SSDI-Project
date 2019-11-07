@@ -56,9 +56,10 @@ export class UserService {
 
   getUserById(id: number): Observable<User> {
     console.log('id: ' + id);
-    return this.http.get<User>(this.usersUrl + 'userById/' + id, { 
+    console.log(this.currentUserSubject.value.authdata);
+    return this.http.get<User>(this.usersUrl + 'userById/' + id, {
       headers: {
-        authorization: this.currentUserSubject.value.authdata
+        authorization: 'Basic ' + this.currentUserSubject.value.authdata
       }
     });
   }
