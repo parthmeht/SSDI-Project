@@ -1,14 +1,14 @@
 <div class="book-search">
     <div class="search-box">
-        <input type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Search for a Book..." type="search" (focus)="showResults = true"(focusout)="showResults = false" />
+        <input type="text" name="search" (keyup)="searchTerm.next($event.target.value)" autocomplete="off" placeholder="Search for a Book..." type="search" />
     </div>
     <div class="results">
             <div class="header">
                 <div class="title">Results</div>
             </div>
         <div class="container">
-            <div class="no-books" *ngIf="!booksInterestedIn">No Books Found</div>
-            <app-book class="books" *ngFor="let book of booksInterestedIn" [book]="book" [fullView]="true"></app-book>
+            <div class="no-books" *ngIf="!results || !results.length">No Books Found</div>
+            <app-book class="books" *ngFor="let book of results" [book]="book" [fullView]="true"></app-book>
         </div>
     </div>
 </div>

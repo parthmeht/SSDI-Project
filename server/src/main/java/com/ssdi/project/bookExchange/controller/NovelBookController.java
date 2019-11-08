@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,6 +18,7 @@ import java.util.Optional;
 public class NovelBookController {
     @Autowired
     private BookRepository bookRepository;
+    @Autowired
     private BookService bookService;
 
     @PostMapping(path="/add-book")
@@ -36,9 +38,13 @@ public class NovelBookController {
         return (List<Book>) bookRepository.findAll();
     }
 
-    @GetMapping("/search/{query}")
-    public List<Book> bookSearch(@PathVariable Optional<String> query) {
-        List<Book> bookList = bookService.searchBooks(query.orElse(" "));
+    @GetMapping("/search")
+    @ResponseBody
+    public List<Book> bookSearch(@RequestParam String query) {
+        List<Book> bookList = new ArrayList<>();
+        if(query != null && !query.isEmpty()) {
+            bookList = bookService.searchBooks(query);
+        }
         return bookList;
     }
 }

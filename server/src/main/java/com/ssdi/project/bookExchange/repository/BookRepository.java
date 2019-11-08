@@ -7,6 +7,6 @@ import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 
 public interface BookRepository extends JpaRepository<Book, Long> {
-    @Query("select u from User u where name like %?1% or author like %?1%")
+    @Query("select u from Book u where title like %?1% or author like %?1%")
     List<Book> searchBooks(String query);
 }
