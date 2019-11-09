@@ -2,10 +2,7 @@ package com.ssdi.project.bookExchange.model;
 
 import lombok.*;
 
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Entity;
+import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
@@ -16,51 +13,18 @@ import java.sql.Date;
 @Getter
 public class Book {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    private Long id;
-    private @NonNull String title;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name ="id")
+    private int id;
+    @Column(name = "title")
+    private String title;
+    @Column (name ="author")
     private String author;
-    private Date date;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    @Override
-    public String toString() {
-        return "Book{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", authorName='" + author + '\'' +
-                ", date=" + date +
-                '}';
-    }
+    @Column (name ="price")
+    private Double price;
+    @Column (name="is_listed")
+    private Boolean isListed;
+    @ManyToOne (cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    private User user;
 }

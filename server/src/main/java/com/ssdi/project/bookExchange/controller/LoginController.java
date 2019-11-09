@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
@@ -32,14 +31,6 @@ public class LoginController {
         return hm;
     }
 
-    /*@RequestMapping(value = "/login", method = RequestMethod.POST)
-    public HashMap<String, Object> validateLogin(@RequestBody String email, @RequestBody String password) {
-        HashMap<String,Object> hm = new HashMap<>();
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.findUserByEmail(auth.getName());
-        return hm;
-    }*/
-
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public HashMap<String, Object> createNewUser(@RequestBody User user, BindingResult bindingResult) {
         HashMap<String,Object> hm = new HashMap<>();
@@ -59,9 +50,9 @@ public class LoginController {
             hm.put("error",errorMessage);
             hm.put("status", String.valueOf(500));
         } else {
-            userService.saveUser(user);
+            User saveUser = userService.saveUser(user);
             hm.put("message","User has been registered successfully");
-            hm.put("user",user);
+            hm.put("user",saveUser);
             hm.put("status", String.valueOf(200));
         }
         return hm;
