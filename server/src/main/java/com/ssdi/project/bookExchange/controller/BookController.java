@@ -3,15 +3,20 @@ package com.ssdi.project.bookExchange.controller;
 import com.ssdi.project.bookExchange.model.Book;
 import com.ssdi.project.bookExchange.repository.BookRepository;
 import com.ssdi.project.bookExchange.repository.UserRepository;
+import com.ssdi.project.bookExchange.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 public class BookController {
+
+    @Autowired
+    private BookService bookService;
 
     @Autowired
     private BookRepository bookRepository;
@@ -51,6 +56,16 @@ public class BookController {
             book.setTitle(bookReq.getTitle());
             return bookRepository.save(book);
         }).orElseThrow(()-> new Exception("book id not found"));
+    }
+
+    @GetMapping("book/search")
+    @ResponseBody
+    public List<Book> bookSearch(@RequestParam String query) {
+        List<Book> bookList = new ArrayList<>();
+        if(query != null && !query.isEmpty()) {
+            bookList = bookService.searchBooks(query);
+        }
+        return bookList;
     }
 
 }
