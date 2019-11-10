@@ -4,16 +4,20 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {User} from '../model/user';
 import {map} from 'rxjs/operators';
 import {ActivatedRouteSnapshot, Router, RouterStateSnapshot} from '@angular/router';
+import { debounceTime, switchMap } from 'rxjs/operators';
+import { distinctUntilChanged } from 'rxjs/operators';
 
 @Injectable()
 export class UserService {
   private usersUrl: string;
+  private user: User
   authenticated = false;
   public currentUser: Observable<User>;
   private currentUserSubject: BehaviorSubject<User>;
 
   constructor(private http: HttpClient, private router: Router) {
     this.usersUrl = 'http://localhost:8080/';
+    this.user = JSON.parse(localStorage.getItem('currentUser'));
     this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
     this.currentUser = this.currentUserSubject.asObservable();
   }
@@ -49,7 +53,16 @@ export class UserService {
       return response.user;
     }));
   }
-
+  search(terms: Observable<string>) : Observable<User[]> {
+    return terms.pipe(debounceTime(400), distinctUntilChanged(), switchMap(term => this.searchEntries(term)));
+  }
+  searchEntries(term): Observable<User[]>  {
+    return this.http.get<User[]>(this.usersUrl + 'search?query=' + term, {
+      headers: {
+        authorization: 'Basic ' + this.user.authdata
+      }
+    });
+  }
   currentUserValue(): User {
     return this.currentUserSubject.value;
   }

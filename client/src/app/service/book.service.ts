@@ -23,7 +23,7 @@ export class BookService {
     return this.http.post<Book>(this.booksUrl + 'add-book', book);
   }
 
-  search(terms: Observable<string>): Observable<Book[]> {
+  search(terms: Observable<string>) : Observable<Book[]> {
     return terms.pipe(debounceTime(400), distinctUntilChanged(), switchMap(term => this.searchEntries(term)));
   }
 

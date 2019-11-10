@@ -1,19 +1,27 @@
 package com.ssdi.project.bookExchange.service;
 
+import com.ssdi.project.bookExchange.BookExchangeApplication;
 import com.ssdi.project.bookExchange.model.User;
 import com.ssdi.project.bookExchange.repository.RoleRepository;
 import com.ssdi.project.bookExchange.repository.UserRepository;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.MockitoAnnotations.initMocks;
 
+@ActiveProfiles("test")
+@RunWith(SpringJUnit4ClassRunner.class)
+@SpringBootTest
 public class UserServiceTest {
     @Mock
     private UserRepository mockUserRepository;
