@@ -9,9 +9,10 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.MockitoAnnotations.initMocks;
 
 public class UserServiceTest {
@@ -42,6 +43,8 @@ public class UserServiceTest {
                 .thenReturn(user);
         Mockito.when(mockUserRepository.findByEmail(anyString()))
                 .thenReturn(user);
+        Mockito.when(mockUserRepository.getById(anyInt()))
+                .thenReturn(user);
     }
 
     @Test
@@ -54,6 +57,18 @@ public class UserServiceTest {
 
         // Verify the results
         assertEquals(email, result.getEmail());
+    }
+
+    @Test
+    public void testgetUserById() {
+        // Setup
+        final int id = 1;
+
+        // Run the test
+        final User result = userServiceUnderTest.getUserById(id);
+
+        // Verify the results
+        assertEquals(id, result.getId());
     }
 
     @Test
