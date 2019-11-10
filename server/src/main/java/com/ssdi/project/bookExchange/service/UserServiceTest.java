@@ -1,6 +1,5 @@
 package com.ssdi.project.bookExchange.service;
 
-import com.ssdi.project.bookExchange.BookExchangeApplication;
 import com.ssdi.project.bookExchange.model.User;
 import com.ssdi.project.bookExchange.repository.RoleRepository;
 import com.ssdi.project.bookExchange.repository.UserRepository;
@@ -13,8 +12,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.*;
@@ -68,7 +65,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void testgetUserById() {
+    public void testGetUserById() {
         // Setup
         final int id = 1;
 
