@@ -29,11 +29,10 @@ import { HomeComponent } from './home/home.component';
 import { LayoutComponent } from './layout/layout.component';
 import { BookComponent } from './book/book.component';
 import { UserService } from './service/user.service';
-import { SearchComponent } from './search/search.component';
-import { SearchResultComponent } from './search-result/search-result.component';
 import { UserSearchComponent } from './user-search/user-search.component';
 import { BookSearchComponent } from './book-search/book-search.component';
 import { UserTableComponent } from './user-table/user-table.component';
+import { UserListComponent } from './user-list/user-list.component';
 
 @Injectable()
 export class XhrInterceptor implements HttpInterceptor {
@@ -59,11 +58,10 @@ export class XhrInterceptor implements HttpInterceptor {
     HomeComponent,
     LayoutComponent,
     BookComponent,
-    SearchComponent,
-    SearchResultComponent,
     UserSearchComponent,
     BookSearchComponent,
-    UserTableComponent
+    UserTableComponent,
+    UserListComponent
   ],
   imports: [
     BrowserModule,

@@ -6,6 +6,7 @@ import {map} from 'rxjs/operators';
 import {ActivatedRouteSnapshot, Router, RouterStateSnapshot} from '@angular/router';
 import { debounceTime, switchMap } from 'rxjs/operators';
 import { distinctUntilChanged } from 'rxjs/operators';
+import {Book} from '../model/book';
 
 @Injectable()
 export class UserService {
@@ -86,5 +87,13 @@ export class UserService {
 
   createBasicAuthToken(username: string, password: string) {
     return 'Basic ' + window.btoa(username + ':' + password);
+  }
+
+  public findAll(): Observable<User[]> {
+    return this.http.get<User[]>(this.usersUrl + 'users', {
+      headers: {
+        authorization: 'Basic ' + this.user.authdata
+      }
+    });
   }
 }

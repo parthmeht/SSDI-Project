@@ -10,6 +10,7 @@ import {SignUpComponent} from './sign-up/sign-up.component';
 import {AuthGuard} from './auth.guard';
 import { BookSearchComponent } from './book-search/book-search.component';
 import { UserSearchComponent } from './user-search/user-search.component';
+import {UserListComponent} from './user-list/user-list.component';
 
 // Routes are set up this way to allow header and footer for all views except login and sign up
 const routes: Routes = [
@@ -19,6 +20,7 @@ const routes: Routes = [
     children: [
       {path: '', component: HomeComponent, canActivate: [AuthGuard]},
       {path: 'books', component: BookListComponent, canActivate: [AuthGuard]},
+      {path: 'users', component: UserListComponent, canActivate: [AuthGuard]},
       {path: 'addBook', component: BookFormComponent, canActivate: [AuthGuard]},
       {path: 'user', component: UserProfileComponent, canActivate: [AuthGuard]},
       {path: 'user/:id', component: UserProfileComponent, canActivate: [AuthGuard]},

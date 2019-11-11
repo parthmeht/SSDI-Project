@@ -1,6 +1,5 @@
 package com.ssdi.project.bookExchange.controller;
 
-import com.ssdi.project.bookExchange.model.Book;
 import com.ssdi.project.bookExchange.model.User;
 import com.ssdi.project.bookExchange.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
@@ -70,17 +68,17 @@ public class LoginController {
         return hm;
     }
 
-    @GetMapping("/allusers")
+    @GetMapping("/users")
     public List<User> findAllUsers(){
         List<User> listUsers = userService.listAll();
         return listUsers;
     }
     
-    @GetMapping("/users")
+    /*@GetMapping("/users")
     public List<User> findAll(@RequestParam Optional<String> name) {
         List<User> listUsers = userService.findUserByName(name.orElse(" "));
         return listUsers;
-    }
+    }*/
 
     @GetMapping("/userById/{id}")
     public User getUserById(@PathVariable int id) {

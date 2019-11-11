@@ -8,6 +8,7 @@ import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
   styleUrls: ['./book-list.component.scss']
 })
 export class BookListComponent implements OnInit {
+  // tslint:disable-next-line:max-line-length
   displayedColumns: string[] = ['id', 'title', 'author', 'isListed', 'price', 'user_email', 'user_name', 'user_lastName', 'user_phoneNumber'];
   dataSource;
   books: Book[];
