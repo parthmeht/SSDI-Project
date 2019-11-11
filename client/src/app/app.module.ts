@@ -8,7 +8,15 @@ import { AppComponent } from './app.component';
 import {HTTP_INTERCEPTORS, HttpClientModule, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 import { BookListComponent } from './book-list/book-list.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatButtonModule, MatCardModule, MatInputModule, MatListModule, MatToolbarModule} from '@angular/material';
+import {
+  MatButtonModule,
+  MatCardModule,
+  MatInputModule,
+  MatListModule,
+  MatPaginatorModule, MatSortModule,
+  MatTableModule,
+  MatToolbarModule
+} from '@angular/material';
 import { BookFormComponent } from './book-form/book-form.component';
 import {FormsModule} from '@angular/forms';
 import {BookService} from './service/book.service';
@@ -68,7 +76,10 @@ export class XhrInterceptor implements HttpInterceptor {
     MatListModule,
     MatToolbarModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule
   ],
   providers: [
     BookService,

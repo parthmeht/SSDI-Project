@@ -1,22 +1,55 @@
-<div class="card my-5">
-  <div class="card-body">
-    <table class="table table-bordered table-striped">
-      <thead class="thead-dark">
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Title</th>
-        <th scope="col">Author Name</th>
-        <th scope="col">Date</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let book of books">
-        <td>{{ book.id }}</td>
-        <td>{{ book.title }}</td>
-        <td>{{book.author}}</td>
-        <td>{{book.date}}</td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
+<h3> List of all Books</h3>
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" matSort>
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
+      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="title">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Book Title </th>
+      <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="author">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Book Author </th>
+      <td mat-cell *matCellDef="let element"> {{element.author}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="isListed">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Available for Sale </th>
+      <td mat-cell *matCellDef="let element"> {{element.isListed}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="price">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Book Price </th>
+      <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+    </ng-container>
+    <ng-container matColumnDef="user_email">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Book Owner Email Id </th>
+      <td mat-cell *matCellDef="let element"> {{element.user.email}} </td>
+    </ng-container>
+    <ng-container matColumnDef="user_name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Book Owner First Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.user.name}} </td>
+    </ng-container>
+    <ng-container matColumnDef="user_lastName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Book Owner Last Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.user.lastName}} </td>
+    </ng-container>
+    <ng-container matColumnDef="user_phoneNumber">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Book Owner Phone Number </th>
+      <td mat-cell *matCellDef="let element"> {{element.user.phoneNumber}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
 </div>

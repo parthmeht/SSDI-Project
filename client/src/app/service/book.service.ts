@@ -11,12 +11,16 @@ export class BookService {
   private booksUrl: string;
   private user: User
   constructor(private http: HttpClient) {
-    this.booksUrl = 'http://localhost:8080/book/';
+    this.booksUrl = 'http://localhost:8080/';
     this.user = JSON.parse(localStorage.getItem('currentUser'));
   }
 
   public findAll(): Observable<Book[]> {
-    return this.http.get<Book[]>(this.booksUrl + 'allBooks');
+    return this.http.get<Book[]>(this.booksUrl + 'books', {
+      headers: {
+        authorization: 'Basic ' + this.user.authdata
+      }
+    });
   }
 
   public save(book: Book) {
@@ -28,7 +32,7 @@ export class BookService {
   }
 
   searchEntries(term): Observable<Book[]>  {
-    return this.http.get<Book[]>(this.booksUrl + 'search?query=' + term, {
+    return this.http.get<Book[]>(this.booksUrl + 'book/search?query=' + term, {
       headers: {
         authorization: 'Basic ' + this.user.authdata
       }
