@@ -5,11 +5,12 @@ import {Book} from '../model/book';
 import { debounceTime, switchMap } from 'rxjs/operators';
 import { distinctUntilChanged } from 'rxjs/operators';
 import { User } from '../model/user';
+// import {type} from 'os';
 
 @Injectable()
 export class BookService {
   private booksUrl: string;
-  private user: User
+  private user: User;
   constructor(private http: HttpClient) {
     this.booksUrl = 'http://localhost:8080/';
     this.user = JSON.parse(localStorage.getItem('currentUser'));
@@ -32,7 +33,13 @@ export class BookService {
   }
 
   public save(book: Book) {
-    return this.http.post<Book>(this.booksUrl + 'add-book', book);
+    const bookurl = 'http://localhost:8080/user/' + this.user.id + '/addBook/';
+    return this.http.post<Book>(bookurl, book, {
+      headers: {
+        authorization: 'Basic ' + this.user.authdata,
+      }
+    }) ;
+     // return this.http.post<Book>(this.booksUrl + 'add-book', book);
   }
 
   search(terms: Observable<string>): Observable<Book[]> {

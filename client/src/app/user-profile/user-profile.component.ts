@@ -28,6 +28,7 @@ export class UserProfileComponent implements OnInit {
   private routeSub: Subscription;
   isMyProfile = false;
   closeResult: string;
+  modalReference: any;
 
   constructor(private bookService: BookService, private userService: UserService, private route: ActivatedRoute,
               private modalService: NgbModal, private formBuilder: FormBuilder) {
@@ -73,10 +74,16 @@ export class UserProfileComponent implements OnInit {
     this.book.author = this.bookForm.controls.author.value;
     this.book.isListed = this.bookForm.controls.isListed.value;
     this.book.price = this.bookForm.controls.price.value;
-    // this.bookService.save(this.book).subscribe(result => this.gotoBookList());
+    this.bookService.save(this.book).subscribe(result => {
+      this.modalReference.close();
+      this.bookService.fetchAllBook().subscribe(data => {
+        this.booksInterestedIn = data;
+        this.bookCollection = data;
+      });
+    });
   }
   openModal(content) {
-    this.modalService.open(content, { centered: true });
+    this.modalReference = this.modalService.open(content, { centered: true });
   }
   onCheckboxClick($event) {
     this.showTextBox = !this.showTextBox;
