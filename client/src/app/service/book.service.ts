@@ -22,6 +22,14 @@ export class BookService {
       }
     });
   }
+  public fetchAllBook(): Observable<Book[]> {
+    const bookurl = 'http://localhost:8080/user/' + this.user.id + '/books/';
+    return this.http.get<Book[]>(bookurl, {
+      headers: {
+        authorization: 'Basic ' + this.user.authdata
+      }
+    }) ;
+  }
 
   public save(book: Book) {
     return this.http.post<Book>(this.booksUrl + 'add-book', book);

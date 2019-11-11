@@ -33,6 +33,7 @@ import { UserSearchComponent } from './user-search/user-search.component';
 import { BookSearchComponent } from './book-search/book-search.component';
 import { UserTableComponent } from './user-table/user-table.component';
 import { UserListComponent } from './user-list/user-list.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @Injectable()
 export class XhrInterceptor implements HttpInterceptor {
@@ -77,7 +78,8 @@ export class XhrInterceptor implements HttpInterceptor {
     ReactiveFormsModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    NgbModule
   ],
   providers: [
     BookService,

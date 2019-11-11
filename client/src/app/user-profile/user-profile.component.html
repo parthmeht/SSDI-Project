@@ -1,33 +1,59 @@
 <div class="profile">
-    <div class="top-bar">
-        <div class="info">
-            <div class="name">{{isMyProfile ? 'My ' : user.name + '\'s'}} Profile</div>
-            <div class="email">{{user.email}}</div>
-        </div>
-        <div class="contact">
-            <!--<button class="contact-button">Contact</button>-->
-        </div>
+  <div class="top-bar">
+    <div class="info">
+      <div class="name">{{isMyProfile ? 'My ' : user.name + '\'s'}} Profile</div>
+      <div class="email">{{user.email}}</div>
     </div>
-    <div class="books">
-        <div class="book-collection">
-            <div class="header">
-                <div class="title">Your Book Collection</div>
-                <button class="add-button">Add</button>
-            </div>
-            <div class="container">
-                <div class="no-books" *ngIf="!bookCollection">No Books</div>
-                <app-book class="books" *ngFor="let book of bookCollection" [book]="book" [fullView]="true"></app-book>
-            </div>
-        </div>
-        <div class="interested-in">
-            <div class="header">
-                <div class="title">Books You Are Interested In</div>
-                <button class="add-button">Add</button>
-            </div>
-            <div class="container">
-                <div class="no-books" *ngIf="!booksInterestedIn">No Books</div>
-                <app-book class="books" *ngFor="let book of booksInterestedIn" [book]="book" [fullView]="true"></app-book>
-            </div>
-        </div>
+    <div class="contact">
+      <!--<button class="contact-button">Contact</button>-->
     </div>
+  </div>
+  <div class="books">
+    <div class="book-collection">
+      <div class="header">
+        <div class="title">Your Book Collection</div>
+        <button class="add-button" (click)="openModal(content)">Add</button>
+      </div>
+      <div class="container">
+        <div class="no-books" *ngIf="!bookCollection">No Books</div>
+        <app-book class="books" *ngFor="let book of bookCollection" [book]="book" [fullView]="true"></app-book>
+      </div>
+    </div>
+    <div class="interested-in">
+      <div class="header">
+        <div class="title">Books You Are Interested In</div>
+        <button class="add-button">Add</button>
+      </div>
+      <div class="container">
+        <div class="no-books" *ngIf="!booksInterestedIn">No Books</div>
+        <app-book class="books" *ngFor="let book of booksInterestedIn" [book]="book" [fullView]="true"></app-book>
+      </div>
+    </div>
+  </div>
 </div>
+<ng-template #content let-modal>
+  <div class="modal-body">
+    <div  class="bookform">
+
+      <form role="form" (submit)="onSubmit()" [formGroup]="bookForm" class="bookform-box">
+        <label for="title">Title</label>
+        <input type="text" [(ngModel)]="book.title"
+               class="title" id="title" name="title"
+               required  formControlName="title" >
+        <label for="authorName">Author Name</label>
+        <input type="text" [(ngModel)]="book.author"
+               class="authorName" id="authorName" name="authorName"
+               required  formControlName="author" >
+        <div>
+          <input type="checkbox" name="isListed"
+                 formControlName="isListed"  class="checkbox" (click)="onCheckboxClick($event)" [(ngModel)]="book.isListed"> List For sale
+        </div>
+        <label *ngIf=showTextBox>Price</label>
+        <input type="text" class="authorName" *ngIf=showTextBox [(ngModel)]="book.price" formControlName="price" >
+        <p id="insertinputs"></p>
+        <button type="submit"  class="submit">Submit</button>
+      </form>
+    </div>
+  </div>
+</ng-template>
+
