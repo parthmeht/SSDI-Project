@@ -11,25 +11,20 @@
     &:hover{
         box-shadow: 0px 2px 5px #636E72;
     }
-    
-    .title-section{
-        width:45%;
-        i{
-            color:#333333;
-        }
-    }
-    .author-section{
-        width:35%;
-        i{
-            color:#333333;
-        }
-    }
-    .date-section{
-        width:20%;
-        display:flex;
-        i{
-            margin-left:auto;
-            color:#333333;
-        }
-    }
+
+  .id-section{
+    width:8%;
+  }
+  .title-section{
+    width:24%;
+  }
+  .author-section{
+    width:24%;
+  }
+  .isListed-section{
+    width: 24%;
+  }
+  .price-section{
+    width: 20%;
+  }
 }

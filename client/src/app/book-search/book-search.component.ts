@@ -12,8 +12,8 @@ import { Book } from '../model/book';
 export class BookSearchComponent implements OnInit {
   results: Book[];
   searchTerm = new Subject<string>();
-  
-  constructor(private bookService: BookService){
+
+  constructor(private bookService: BookService) {
     this.bookService.search(this.searchTerm)
     .subscribe(results => {
       console.log(results);

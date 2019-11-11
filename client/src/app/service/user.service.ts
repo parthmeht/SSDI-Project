@@ -9,8 +9,8 @@ import { distinctUntilChanged } from 'rxjs/operators';
 
 @Injectable()
 export class UserService {
-  private usersUrl: string;
-  private user: User
+  private readonly usersUrl: string;
+  private user: User;
   authenticated = false;
   public currentUser: Observable<User>;
   private currentUserSubject: BehaviorSubject<User>;
@@ -53,11 +53,11 @@ export class UserService {
       return response.user;
     }));
   }
-  search(terms: Observable<string>) : Observable<User[]> {
+  search(terms: Observable<string>): Observable<User[]> {
     return terms.pipe(debounceTime(400), distinctUntilChanged(), switchMap(term => this.searchEntries(term)));
   }
   searchEntries(term): Observable<User[]>  {
-    return this.http.get<User[]>(this.usersUrl + 'search?query=' + term, {
+    return this.http.get<User[]>(this.usersUrl + 'user/search?query=' + term, {
       headers: {
         authorization: 'Basic ' + this.user.authdata
       }

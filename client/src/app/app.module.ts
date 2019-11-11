@@ -25,6 +25,7 @@ import { SearchComponent } from './search/search.component';
 import { SearchResultComponent } from './search-result/search-result.component';
 import { UserSearchComponent } from './user-search/user-search.component';
 import { BookSearchComponent } from './book-search/book-search.component';
+import { UserTableComponent } from './user-table/user-table.component';
 
 @Injectable()
 export class XhrInterceptor implements HttpInterceptor {
@@ -53,7 +54,8 @@ export class XhrInterceptor implements HttpInterceptor {
     SearchComponent,
     SearchResultComponent,
     UserSearchComponent,
-    BookSearchComponent
+    BookSearchComponent,
+    UserTableComponent
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,6 @@
 package com.ssdi.project.bookExchange.controller;
 
+import com.ssdi.project.bookExchange.model.Book;
 import com.ssdi.project.bookExchange.model.User;
 import com.ssdi.project.bookExchange.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,6 +86,16 @@ public class LoginController {
     public User getUserById(@PathVariable int id) {
         User user = userService.getUserById(id);
         return user;
+    }
+
+    @GetMapping("user/search")
+    @ResponseBody
+    public List<User> bookSearch(@RequestParam String query) {
+        List<User> userList = new ArrayList<>();
+        if(query != null && !query.isEmpty()) {
+            userList = userService.searchUsers(query);
+        }
+        return userList;
     }
 
 

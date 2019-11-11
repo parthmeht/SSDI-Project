@@ -55,4 +55,8 @@ public class UserService {
         return userRepository.getById(id);
     }
 
+    public List<User> searchUsers(String query) {
+        return userRepository.searchUsers(query);
+    }
+
 }
