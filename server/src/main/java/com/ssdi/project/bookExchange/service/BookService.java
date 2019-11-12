@@ -21,4 +21,7 @@ public class BookService {
         return bookRepository.searchBooks(query);
     }
 
+    public List<Book> findAll(){
+        return bookRepository.findAll();
+    }
 }

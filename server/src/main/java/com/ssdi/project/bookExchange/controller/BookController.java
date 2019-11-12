@@ -27,7 +27,7 @@ public class BookController {
 
     @GetMapping("/books")
     public List<Book> getAllBooks(){
-        return bookRepository.findAll();
+        return bookService.findAll();
     }
 
     @GetMapping("/user/{userId}/books")
