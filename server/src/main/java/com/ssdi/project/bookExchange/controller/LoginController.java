@@ -88,7 +88,7 @@ public class LoginController {
 
     @GetMapping("user/search")
     @ResponseBody
-    public List<User> bookSearch(@RequestParam String query) {
+    public List<User> userSearch(@RequestParam String query) {
         List<User> userList = new ArrayList<>();
         if(query != null && !query.isEmpty()) {
             userList = userService.searchUsers(query);

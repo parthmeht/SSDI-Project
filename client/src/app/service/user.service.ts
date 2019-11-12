@@ -36,7 +36,15 @@ export class UserService {
 
   public createNewUser(user: User) {
     console.log(user);
-    return this.http.post<User>(this.usersUrl + 'registration', user);
+    return this.http.post<User>(this.usersUrl + 'registration', user)
+      .pipe(map((response: any) => {
+      // store user details and basic auth credentials in local storage to keep user logged in between page refreshes
+      console.log(response);
+      response.user.authdata = window.btoa(user.email + ':' + user.password);
+      localStorage.setItem('currentUser', JSON.stringify(response.user));
+      this.currentUserSubject.next(response.user);
+      return response.user;
+    }));
   }
 
   authenticate(credentials) {
