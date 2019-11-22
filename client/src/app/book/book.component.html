@@ -1,17 +1,14 @@
-<div class="book">
-  <span class="id-section">
-        <span class="id">{{book.id}}</span>
-    </span>
+<a [routerLink]="['/user', book.user.id]" class="book">
     <span class="title-section">
         <span class="title">{{book.title}}</span>
     </span>
     <span class="author-section">
         <span class="author">{{book.author}}</span>
     </span>
-    <span *ngIf="fullView" class="isListed-section">
-        <span class="isListed">{{book.isListed}}</span>
+    <span *ngIf="fullView" class="owner-section">
+        <span class="price">{{book.user ? (book.user.name + ' ' + book.user.lastName) : 'No owner'}}</span>
     </span>
-  <span *ngIf="fullView" class="price-section">
-        <span class="price">{{book.price}}</span>
+  <span class="price-section">
+        <span class="price">{{book.isListed ? '$' + book.price : 'Not for sale'}}</span>
     </span>
-</div>
+</a>

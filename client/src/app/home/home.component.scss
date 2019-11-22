@@ -1,118 +1,52 @@
-#rig {
-	max-width:800px;
-	//margin:0 auto;
-	padding:0;
-	font-size:0;
-	list-style:none;
-	background-color:none;
-}
-#rig li {
-	display:inline-block;
-	*display:inline;
-	width:25%;
-	vertical-align:middle;
-	box-sizing:border-box;
-	margin:0;
-	padding:0;
-}
-div
-{
-    margin-top: 130px;
-    margin-left: 280px;
-}
-.rig-cell {
-	margin:12px;
-	box-shadow:0 1px 4px rgba(0,0,0,0.4);
-	padding:16px;
-	border:none;
-	color:#555;
-	background-color:white;
-	text-decoration:none;
-	text-align:center;
-	display:block;
-	position: relative;
-	overflow:hidden;
-}
+.home{
+    height:84vh;
+    width:100vw;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	margin-top:auto;
+	margin-bottom:auto;
+	ul {
+		max-width:80%;
+		list-style:none;
+		display:flex;
+		li {
+			width:13vw;
+			vertical-align:middle;
+			box-sizing:border-box;
+			margin:2vw;
 
-.rig-cell h3 {
-	font-size:18px;
-	font-family:'Oswald', sans-serif;
-	font-weight:normal;
-}
+			a {
+				box-shadow:0 1px 4px rgba(0,0,0,0.4);
+				height:100%;
+				width:100%;
+				border:none;
+				color:#555;
+				background-color:white;
+				text-decoration:none;
+				text-align:center;
+				display:flex;
+				flex-direction:column;
+				justify-content:space-between;
 
+				h3 {
+				}
 
-.rig-img {
-	display:block;
-	border:none;
-	width:100%;
-	height:0;
-    padding-top:83.461538%;
-    background-size:cover;
-	background-color:white;
-	background-image:url(1.PNG);
-    background-repeat:no-repeat;
-	position:relative; /* Make its pseudo :after to be relative to it. */
-}
+				i {
+					font-size:8vw;
+					margin: 5vh 2vw;
+					color:#333;
+				}
+				img{
+					width:10vw;
+					margin: 5vh 2vw;
 
-.rig-img1 {
-	display:block;
-	border:none;
-	width:100%;
-	height:0;
-    padding-top:83.461538%;
-    background-size:cover;
-	background-color:white;
-	background-image:url(2.PNG);
-    background-repeat:no-repeat;
-	position:relative; /* Make its pseudo :after to be relative to it. */
-}
-
-.rig-img2 {
-	display:block;
-	border:none;
-	width:100%;
-	height:0;
-    padding-top:83.461538%;
-    background-size:cover;
-	background-color:white;
-	background-image:url(3.PNG);
-    background-repeat:no-repeat;
-	position:relative; /* Make its pseudo :after to be relative to it. */
-}
-
-
-#rig li:hover .rig-img {
-    transform:scale(1.05);
-}
-
-/* If have the overlay layer */
-.rig-overlay {
-	position: absolute;
-	display:block;
-	top:0;left:0;bottom:0;right:0;
-	margin:auto;
-	background:white;
-	background-size:50px 50px;
-	opacity:0;
-	filter:alpha(opacity=0);/*For older IE*/
-	transition:all 0.3s;
-}
-#rig li:hover .rig-overlay {
-	opacity:0.5;
-}
-
-@media (max-width: 9000px) {
-	#rig li {width:25%;}
-}
-
-@media (max-width: 800px) {
-	#rig li {width:33.33%;}
-}
-
-@media (max-width: 500px) {
-	#rig li {width:50%;}
-}
-
-@media (max-width: 350px) {
-	#rig li {width:100%;}
+				}
+			}
+			&:hover{
+				
+				box-shadow: 0px 2px 5px #636E72;
+			}
+		}
+	}
 }

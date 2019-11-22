@@ -1,14 +1,26 @@
 <div class="book-search">
     <div class="search-box">
-        <input type="text" name="search" (keyup)="searchTerm.next($event.target.value)" autocomplete="off" placeholder="Search for a Book..." type="search" />
+        <input type="text" name="search" (keyup)="searchTerm.next($event.target.value)" [(ngModel)]="term" autocomplete="off" placeholder="Search for a Book..." type="search" />
     </div>
     <div class="results">
             <div class="header">
-                <div class="title">Results</div>
+                    <span class="title-section">
+                        <span class="title">Book Title</span>
+                    </span>
+                    <span class="author-section">
+                        <span class="author">Author</span>
+                    </span>
+                    <span class="owner-section">
+                            <span class="owner">Book Owner</span>
+
+                    </span>
+                  <span class="price-section">
+                        <span class="price">Price</span>
+                    </span>
             </div>
         <div class="container">
-            <div class="no-books" *ngIf="!results || !results.length">No Books Found</div>
-            <app-book class="books" *ngFor="let book of results" [book]="book" [fullView]="true"></app-book>
+            <div class="no-books" *ngIf="term && (!results || !results.length)">No Books Found</div>
+            <app-book class="books" *ngFor="let book of (term ? results : allBooks)" [book]="book" [fullView]="true"></app-book>
         </div>
     </div>
 </div>

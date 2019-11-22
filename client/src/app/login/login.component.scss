@@ -5,6 +5,7 @@
     width:100vw;
     height:100vh;
     background-color:#DFE6E9;
+    box-sizing:content-box;
     .login-title{
         color:#509e2f;
         height: 6vh;
@@ -28,8 +29,8 @@
     }
     .login-box{
         margin-top:10vh;
-        height:50vh;
-        width:25vw;
+        height:40vh;
+        width:16vw;
         background-color: #fff;
         box-shadow: 0px 2px 5px #636E72;
         min-width:300px;

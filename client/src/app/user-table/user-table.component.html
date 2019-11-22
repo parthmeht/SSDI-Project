@@ -1,17 +1,8 @@
-<div class="user-table">
-  <span class="id-section">
-        <span class="id">{{user.id}}</span>
-    </span>
+<a [routerLink]="['/user', user.id]" class="user-table">
     <span class="name-section">
-        <span class="name">{{user.name}}</span>
-    </span>
-  <span class="lastName-section">
-        <span class="lastName">{{user.lastName}}</span>
+        <span class="name">{{user.name + ' ' + user.lastName}}</span>
     </span>
   <span class="email-section">
         <span class="email">{{user.email}}</span>
     </span>
-  <span class="phoneNumber-section">
-        <span class="phoneNumber">{{user.phoneNumber}}</span>
-    </span>
-</div>
+</a>

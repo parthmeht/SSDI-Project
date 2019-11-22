@@ -12,6 +12,7 @@ import { User } from '../model/user';
 export class UserSearchComponent implements OnInit {
   results: User[];
   searchTerm = new Subject<string>();
+  allUsers: User[];
 
   constructor(private userService: UserService) {
     this.userService.search(this.searchTerm)
@@ -22,6 +23,10 @@ export class UserSearchComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.userService.findAll().subscribe(data => {
+      this.allUsers = data;
+      console.log(this.allUsers);
+    });
   }
 
 }

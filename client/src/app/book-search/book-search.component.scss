@@ -65,25 +65,44 @@
             align-items:center;
             padding:1vh;
             justify-content:center;
-            .title{
-                font-size:2.3vh;
-            }
+            .title-section{
+                width:33%;
+                margin-left:2vw;
+              }
+              .author-section{
+                width:25%;
+                text-align:center;
+                margin-right:auto;
+                margin-left:auto;
+              }
+              .owner-section{
+                width:25%;
+                text-align:center;
+              }
+              .price-section{
+                width: 17%;
+                margin-left:auto;
+                text-align:right;
+                margin-right:2vw;
+              }
         }
         .container{
             display:flex;
             flex-direction:column;
             align-items:center;
-            min-height:10vh;
-            padding:1vh;
-            max-height:30vh;
+            width:100%;
             overflow-y:auto;
+            margin:0;
+            padding:0;
             .no-books{
+                padding-top:3vh;
+                align-self:center;
                 margin-top:auto;
                 margin-bottom:auto;
                 font-size:2vh;
             }
             .books{
-                width:98%;
+                width:100%;
             }
 
         }

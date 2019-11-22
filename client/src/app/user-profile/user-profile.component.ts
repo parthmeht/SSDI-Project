@@ -16,8 +16,8 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 })
 export class UserProfileComponent implements OnInit {
-  bookCollection: Book[];
-  booksInterestedIn: Book[];
+  bookCollection: Book[] = [];
+  booksInterestedIn: Book[] = [];
   user: User;
 
   book: Book;
@@ -33,6 +33,7 @@ export class UserProfileComponent implements OnInit {
   constructor(private bookService: BookService, private userService: UserService, private route: ActivatedRoute,
               private modalService: NgbModal, private formBuilder: FormBuilder) {
     this.book = new Book();
+    this.user = new User;
   }
 
   ngOnInit() {
@@ -48,8 +49,6 @@ export class UserProfileComponent implements OnInit {
       this.bookCollection = data;
     });
     this.routeSub = this.route.params.subscribe(params => {
-      console.log(params);
-      console.log(params.id);
       if (params && params.hasOwnProperty('id')) {
         this.userService.getUserById(params.id).subscribe(data => {
           this.user = data;

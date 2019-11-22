@@ -14,12 +14,23 @@
         <div class="title">Your Book Collection</div>
         <button class="add-button" (click)="openModal(content)">Add</button>
       </div>
+      <div class="header-two">
+          <span class="title-section">
+              <span class="title">Book Title</span>
+          </span>
+          <span class="author-section">
+              <span class="author">Author</span>
+          </span>
+        <span class="price-section">
+              <span class="price">Price</span>
+          </span>
+  </div>
       <div class="container">
-        <div class="no-books" *ngIf="!bookCollection">No Books</div>
-        <app-book class="books" *ngFor="let book of bookCollection" [book]="book" [fullView]="true"></app-book>
+        <div class="no-books" *ngIf="!bookCollection.length">No Books</div>
+        <app-book class="books" *ngFor="let book of bookCollection" [book]="book"></app-book>
       </div>
     </div>
-    <div class="interested-in">
+    <!-- <div class="interested-in">
       <div class="header">
         <div class="title">Books You Are Interested In</div>
         <button class="add-button">Add</button>
@@ -28,7 +39,7 @@
         <div class="no-books" *ngIf="!booksInterestedIn">No Books</div>
         <app-book class="books" *ngFor="let book of booksInterestedIn" [book]="book" [fullView]="true"></app-book>
       </div>
-    </div>
+    </div> -->
   </div>
 </div>
 <ng-template #content let-modal>
@@ -36,6 +47,7 @@
     <div  class="bookform">
 
       <form role="form" (submit)="onSubmit()" [formGroup]="bookForm" class="bookform-box">
+          <h1>Add Book</h1>
         <label for="title">Title</label>
         <input type="text" [(ngModel)]="book.title"
                class="title" id="title" name="title"

@@ -11,6 +11,7 @@ import { Book } from '../model/book';
 })
 export class BookSearchComponent implements OnInit {
   results: Book[];
+  allBooks: Book[];
   searchTerm = new Subject<string>();
 
   constructor(private bookService: BookService) {
@@ -22,6 +23,10 @@ export class BookSearchComponent implements OnInit {
  }
 
   ngOnInit() {
+    this.bookService.findAll().subscribe(data => {
+      this.allBooks = data;
+      console.log(this.allBooks);
+    });
   }
 
 }

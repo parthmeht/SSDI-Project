@@ -2,6 +2,7 @@
 <div class="bookform">
 
         <form role="form" (submit)="onSubmit()" [formGroup]="bookForm" class="bookform-box">
+               <h1>Add Book</h1>
         <label for="title">Title</label>
         <input type="text" [(ngModel)]="book.title"
                class="title" id="title" name="title"

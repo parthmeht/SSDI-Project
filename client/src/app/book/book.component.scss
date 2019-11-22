@@ -1,30 +1,34 @@
 .book{
     display:flex;
-    border:1px solid #636E72;
-    background-color: #DFE6E9;
+    border-bottom:1px solid #636E72;
     box-shadow:none;
-    border-radius:5px;
-    padding:1vh 1vw;
-    margin:.5vh;
+    padding: 2vh 1vw;
     font-size:1.5vh;
     cursor:pointer;
+    color:inherit;
+    text-decoration: none;
     &:hover{
-        box-shadow: 0px 2px 5px #636E72;
+      background-color: #DFE6E9;
     }
-
-  .id-section{
-    width:8%;
-  }
-  .title-section{
-    width:24%;
-  }
-  .author-section{
-    width:24%;
-  }
-  .isListed-section{
-    width: 24%;
-  }
-  .price-section{
-    width: 20%;
-  }
+    
+    .title-section{
+      width:33%;
+      margin-left:2vw;
+    }
+    .author-section{
+      width:25%;
+      text-align:center;
+      margin-right:auto;
+      margin-left:auto;
+    }
+    .owner-section{
+      width:25%;
+      text-align:center;
+    }
+    .price-section{
+      width: 17%;
+      margin-left:auto;
+      text-align:right;
+      margin-right:2vw;
+    }
 }

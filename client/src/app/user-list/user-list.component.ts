@@ -12,6 +12,7 @@ export class UserListComponent implements OnInit {
   displayedColumns: string[] = ['id', 'name', 'lastName', 'email', 'phoneNumber'];
   dataSource;
   users: User[];
+  term: "";
   constructor(private userService: UserService) { }
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;

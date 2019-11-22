@@ -1,14 +1,19 @@
 <div class="user-search">
     <div class="search-box">
-        <input type="text" name="search" (keyup)="searchTerm.next($event.target.value)" autocomplete="off" placeholder="Search for a Users..." type="search" />
+        <input type="text" name="search" (keyup)="searchTerm.next($event.target.value)" [(ngModel)]="term" autocomplete="off" placeholder="Search for a Users..." type="search" />
     </div>
     <div class="results">
             <div class="header">
-                <div class="title">Results</div>
+                    <span class="name-section">
+                        <span class="name">Name</span>
+                    </span>
+                    <span class="email-section">
+                        <span class="email">Email</span>
+                    </span>
             </div>
         <div class="container">
-            <div class="no-users" *ngIf="!results || !results.length">No Users Found</div>
-            <app-user-table class="users" *ngFor="let user of results" [user]="user"></app-user-table>
+            <div class="no-users" *ngIf="term && (!results || !results.length)">No Users Found</div>
+            <app-user-table class="users" *ngFor="let user of ((term) ? results : allUsers)" [user]="user"></app-user-table>
         </div>
     </div>
 </div>
