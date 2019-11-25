@@ -35,6 +35,7 @@ import { UserTableComponent } from './user-table/user-table.component';
 import { UserListComponent } from './user-list/user-list.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {MessageService} from './service/message.service';
+import { InboxComponent } from './inbox/inbox.component';
 
 @Injectable()
 export class XhrInterceptor implements HttpInterceptor {
