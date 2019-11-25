@@ -73,12 +73,6 @@ public class LoginController {
         List<User> listUsers = userService.listAll();
         return listUsers;
     }
-    
-    /*@GetMapping("/users")
-    public List<User> findAll(@RequestParam Optional<String> name) {
-        List<User> listUsers = userService.findUserByName(name.orElse(" "));
-        return listUsers;
-    }*/
 
     @GetMapping("/userById/{id}")
     public User getUserById(@PathVariable int id) {

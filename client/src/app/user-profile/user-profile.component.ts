@@ -7,6 +7,8 @@ import { Subscription } from 'rxjs';
 import { User } from '../model/user';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Message} from '../model/message';
+import {MessageService} from '../service/message.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -19,21 +21,25 @@ export class UserProfileComponent implements OnInit {
   bookCollection: Book[] = [];
   booksInterestedIn: Book[] = [];
   user: User;
-
+  message: Message;
   book: Book;
+  loggedInUser: User;
   showTextBox = false;
   submitted = false;
   isChecked = false;
   bookForm: FormGroup;
+  messageForm: FormGroup;
   private routeSub: Subscription;
   isMyProfile = false;
   closeResult: string;
   modalReference: any;
 
   constructor(private bookService: BookService, private userService: UserService, private route: ActivatedRoute,
-              private modalService: NgbModal, private formBuilder: FormBuilder) {
+              private modalService: NgbModal, private formBuilder: FormBuilder, private messageService: MessageService) {
     this.book = new Book();
-    this.user = new User;
+    this.user = new User();
+    this.message = new Message();
+    this.loggedInUser = new User();
   }
 
   ngOnInit() {
@@ -44,6 +50,10 @@ export class UserProfileComponent implements OnInit {
       isListed: ['', Validators.nullValidator],
       price: ['', Validators.nullValidator]
     });
+    this.messageForm = this.formBuilder.group({
+      message_title: ['', Validators.required],
+      message_body: ['', Validators.required]
+    });
     this.bookService.fetchAllBook().subscribe(data => {
       this.booksInterestedIn = data;
       this.bookCollection = data;
@@ -52,10 +62,12 @@ export class UserProfileComponent implements OnInit {
       if (params && params.hasOwnProperty('id')) {
         this.userService.getUserById(params.id).subscribe(data => {
           this.user = data;
+          this.loggedInUser = this.userService.currentUserValue();
         });
       } else {
         this.isMyProfile = true;
         this.user = this.userService.currentUserValue();
+        this.loggedInUser = this.user;
       }
     });
   }
@@ -87,5 +99,20 @@ export class UserProfileComponent implements OnInit {
   onCheckboxClick($event) {
     this.showTextBox = !this.showTextBox;
     console.log(this.isChecked);
+  }
+
+  onMessageSubmit() {
+    console.log(this.messageForm);
+    console.log('Inside On Message Submit');
+    //this.loggedInUser = this.userService.currentUserValue();
+    this.submitted = true;
+    this.message.title = this.messageForm.controls.message_title.value;
+    this.message.body = this.messageForm.controls.message_body.value;
+    this.message.senderId = this.loggedInUser;
+    this.message.receiverId = this.user;
+    console.log(this.message);
+    this.messageService.save(this.message).subscribe(result => {
+      this.modalReference.close();
+    });
   }
 }

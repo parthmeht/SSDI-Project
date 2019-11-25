@@ -34,6 +34,7 @@ import { BookSearchComponent } from './book-search/book-search.component';
 import { UserTableComponent } from './user-table/user-table.component';
 import { UserListComponent } from './user-list/user-list.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {MessageService} from './service/message.service';
 
 @Injectable()
 export class XhrInterceptor implements HttpInterceptor {
@@ -84,6 +85,7 @@ export class XhrInterceptor implements HttpInterceptor {
   providers: [
     BookService,
     UserService,
+    MessageService,
     { provide: HTTP_INTERCEPTORS, useClass: XhrInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]

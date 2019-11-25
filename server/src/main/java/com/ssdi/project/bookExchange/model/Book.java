@@ -3,7 +3,6 @@ package com.ssdi.project.bookExchange.model;
 import lombok.*;
 
 import javax.persistence.*;
-import java.sql.Date;
 
 @Entity
 @Builder(toBuilder = true)

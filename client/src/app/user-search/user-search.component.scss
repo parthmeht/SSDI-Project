@@ -28,10 +28,10 @@
             width: 15px;
             cursor: auto;
             border-radius: 5px;
-        
+
             font-size:2vh;
-            padding:1vh 0vw; 
-            background:#fff; 
+            padding:1vh 0vw;
+            background:#fff;
             border:0 none;
             border:1px solid #636E72;
             outline:none;
@@ -58,7 +58,8 @@
         margin: 0 3vw;
         margin-bottom:5vh;
         width:80vw;
-        .header{
+        overflow-y: scroll;
+      .header{
             background-color: #DFE6E9;
             border-bottom:1px solid #636E72;
             display:flex;

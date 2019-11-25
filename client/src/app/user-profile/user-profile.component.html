@@ -4,15 +4,13 @@
       <div class="name">{{isMyProfile ? 'My ' : user.name + '\'s'}} Profile</div>
       <div class="email">{{user.email}}</div>
     </div>
-    <div class="contact">
-      <!--<button class="contact-button">Contact</button>-->
-    </div>
   </div>
   <div class="books">
     <div class="book-collection">
       <div class="header">
         <div class="title">Your Book Collection</div>
-        <button class="add-button" (click)="openModal(content)">Add</button>
+        <button *ngIf="!this.isMyProfile && this.user.id!==this.loggedInUser.id" (click)="openModal(messageContent)">Send Message</button>
+        <button class="add-button" (click)="openModal(contentBook)">Add</button>
       </div>
       <div class="header-two">
           <span class="title-section">
@@ -42,10 +40,9 @@
     </div> -->
   </div>
 </div>
-<ng-template #content let-modal>
+<ng-template #contentBook let-modal>
   <div class="modal-body">
-    <div  class="bookform">
-
+    <div class="bookform">
       <form role="form" (submit)="onSubmit()" [formGroup]="bookForm" class="bookform-box">
           <h1>Add Book</h1>
         <label for="title">Title</label>
@@ -64,6 +61,24 @@
         <input type="text" class="authorName" *ngIf=showTextBox [(ngModel)]="book.price" formControlName="price" >
         <p id="insertinputs"></p>
         <button type="submit"  class="submit">Submit</button>
+      </form>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #messageContent let-modal>
+  <div class="modal-body">
+    <div class="messageForm">
+      <form role="form" (submit)="onMessageSubmit()" [formGroup]="messageForm" class="messageForm-box">
+        <h6>Send Message</h6>
+        <label for="message_title">Message Input</label><input type="text"
+                                                  id="message_title" name="title" class="title"
+                                                  required formControlName="message_title" >
+        <label for="message_body">Message Description</label><textarea
+            id="message_body" name="body" class="body"
+            required formControlName="message_body" rows="4" cols="50">
+        </textarea>
+        <button type="submit" class="submit">Submit</button>
       </form>
     </div>
   </div>

@@ -56,9 +56,8 @@
             box-shadow: 0px 2px 5px #636E72;
             border:1px solid #636E72;
             min-height:15vh;
-            margin: 0 3vw;
-            margin-bottom:5vh;
-            .header{
+          margin: 0 3vw 5vh;
+          .header{
                 background-color: #DFE6E9;
                 border-bottom:1px solid #636E72;
                 display:flex;
@@ -116,7 +115,7 @@
               .books{
                   width:100%;
               }
-  
+
           }
         }
     }
@@ -130,7 +129,6 @@
   h1{
     margin-left:auto;
     margin-right:auto;
-
   }
   .bookform-title{
     color:#509e2f;
@@ -141,7 +139,7 @@
     margin-top:15vh;
     .image-container{
       width: 6vh;
-      margin: 1vh 0vw;
+      margin: 1vh 0;
       img{
         max-height:7vh;
         max-width:7vw;
@@ -175,6 +173,85 @@
       background-color:#DFE6E9;
       outline:none;
       height:30px;
+      font-size:1.5vh;
+      margin-bottom:4vh;
+      border:1px solid #636E72;
+    }
+    .submit{
+      align-self:center;
+      width:150px;
+      background-color: #509e2f;
+      cursor:pointer;
+      height: 50px;
+      border:1px solid #636E72;
+      color:#fff;
+      font-size:18px;
+      &:hover{
+        box-shadow: 0px 2px 5px #636E72;
+      }
+    }
+
+  }
+}
+
+.messageForm{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  background-color:#ffffff;
+  h1{
+    margin-left:auto;
+    margin-right:auto;
+
+  }
+  .messageForm-title{
+    color:#509e2f;
+    height: 6vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top:15vh;
+    .image-container{
+      width: 6vh;
+      margin: 1vh 0vw;
+      img{
+        max-height:7vh;
+        max-width:7vw;
+      }
+    }
+
+    h1{
+      margin-left:2vw;
+      font-size: 4.5vh;
+    }
+  }
+  .messageForm-box{
+    width:70%;
+    background-color: #fff;
+    display:flex;
+    flex-direction:column;
+    h2{
+      margin-top:0;
+      margin-bottom:5vh;
+      color:#509e2f;
+      font-size:2.5vh;
+      align-self:center;
+    }
+    label{
+      font-size:2vh;
+    }
+    .title{
+      background-color:#DFE6E9;
+      outline:none;
+      height:30px;
+      font-size:1.5vh;
+      margin-bottom:4vh;
+      border:1px solid #636E72;
+    }
+    .body{
+      background-color:#DFE6E9;
+      outline:none;
+      height:80px;
       font-size:1.5vh;
       margin-bottom:4vh;
       border:1px solid #636E72;
