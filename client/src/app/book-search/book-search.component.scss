@@ -63,10 +63,10 @@
             border-bottom:1px solid #636E72;
             display:flex;
             align-items:center;
-            padding:1vh;
+            padding:.8vh 1vw;
             justify-content:center;
             .title-section{
-                width:33%;
+                width:30%;
                 margin-left:2vw;
               }
               .author-section{
@@ -84,6 +84,9 @@
                 margin-left:auto;
                 text-align:right;
                 margin-right:2vw;
+              }
+              .edit-section{
+                  width:3%;
               }
         }
         .container{

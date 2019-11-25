@@ -11,8 +11,8 @@
   <span class="price-section">
         <span class="price">{{book.isListed ? '$' + book.price : 'Not for sale'}}</span>
     </span>
-  <span (click)="updateBook(contentBook)">
-    <i class="fa fa-edit fa-2x" style="position:relative;color:grey;"></i>
+  <span class="edit-section" (click)="updateBook(contentBook)">
+    <i class="fa fa-edit fa-lg" style="position:relative;color:grey;"></i>
   </span>
 </a>
 
