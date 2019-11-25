@@ -29,7 +29,7 @@ public class BookServiceTest {
     @Before
     public void setUp() {
         initMocks(this);
-        bookServiceUnderTest = new BookService(mockBookRepository);
+       // bookServiceUnderTest = new BookService(mockBookRepository);
         List<Book> books = new ArrayList<>();
         List<Book> searchResults = new ArrayList<>();
         Book book1 = Book.builder().id(1).author("J K Rowling").title("Harry Potter").isListed(true).price(25.99).build();

@@ -42,6 +42,15 @@ export class BookService {
      // return this.http.post<Book>(this.booksUrl + 'add-book', book);
   }
 
+  public update(book: Book) {
+    const bookurl = 'http://localhost:8080/updateBook/' + book.id ;
+    return this.http.put<Book>(bookurl, book, {
+      headers: {
+        authorization: 'Basic ' + this.user.authdata,
+      }
+    }) ;
+  }
+
   search(terms: Observable<string>): Observable<Book[]> {
     return terms.pipe(debounceTime(400), distinctUntilChanged(), switchMap(term => this.searchEntries(term)));
   }

@@ -1,9 +1,12 @@
 package com.ssdi.project.bookExchange.controller;
 
 import com.ssdi.project.bookExchange.model.Book;
+import com.ssdi.project.bookExchange.model.User;
 import com.ssdi.project.bookExchange.repository.BookRepository;
 import com.ssdi.project.bookExchange.repository.UserRepository;
 import com.ssdi.project.bookExchange.service.BookService;
+import com.ssdi.project.bookExchange.service.UserService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
@@ -17,13 +20,9 @@ public class BookController {
 
     @Autowired
     private BookService bookService;
-
+    
     @Autowired
-    private BookRepository bookRepository;
-
-    @Qualifier("userRepository")
-    @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
 
     @GetMapping("/books")
     public List<Book> getAllBooks(){
@@ -32,30 +31,35 @@ public class BookController {
 
     @GetMapping("/user/{userId}/books")
     public List<Book> getBooksByUser(@PathVariable(value = "userId") Integer userId) {
-        return bookRepository.findByUserId(userId);
+        return bookService.getBookByUserId(userId);
     }
 
     @PostMapping("/user/{userId}/addBook")
     public Book createBook(@PathVariable(value = "userId") Integer userId,
                              @Valid @RequestBody Book book) throws Exception {
-        return userRepository.findById(userId).map(user -> {
-            book.setUser(user);
-            return bookRepository.save(book);
-        }).orElseThrow(()-> new Exception("user not found"));
+    	User user = userService.getUserById(userId);
+    	book.setUser(user);
+        return bookService.saveBook(book);
+ //    	return userRepository.findById(userId).map(user -> {
+//            book.setUser(user);
+//            return bookRepository.save(book);
+//        }).orElseThrow(()-> new Exception("user not found"));
     }
 
-    @PutMapping("/users/{userId}/updateBook/{bookId}")
-    public Book updateBook(@PathVariable(value = "userId") Integer userId,
-                           @PathVariable(value = "bookId") Integer bookId, @Valid @RequestBody Book bookReq)
+    @PutMapping("/updateBook/{bookId}")
+    public Book updateBook(@PathVariable(value = "bookId") int bookId, @Valid @RequestBody Book bookReq)
             throws Exception {
-        if (!userRepository.existsById(userId)) {
-            throw new Exception("UserId not found");
-        }
-
-        return bookRepository.findById(bookId).map(book-> {
-            book.setTitle(bookReq.getTitle());
-            return bookRepository.save(book);
-        }).orElseThrow(()-> new Exception("book id not found"));
+    	Book book = bookService.getBookById(bookId);
+    	book.setTitle(bookReq.getTitle());
+    	book.setAuthor(bookReq.getAuthor());
+    	book.setPrice(bookReq.getPrice());
+    	book.setIsListed(bookReq.getIsListed());
+    	return bookService.saveBook(book);
+    	//    		return bookRepository.findById(bookId).map(book-> {
+//            book.setTitle(bookReq.getTitle());
+//            book.setAuthor(bookReq.getAuthor());
+//            return bookRepository.save(book);
+//        }).orElseThrow(()-> new Exception("book id not found"));
     }
 
     @GetMapping("book/search")

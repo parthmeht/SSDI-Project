@@ -104,7 +104,7 @@ export class UserProfileComponent implements OnInit {
   onMessageSubmit() {
     console.log(this.messageForm);
     console.log('Inside On Message Submit');
-    //this.loggedInUser = this.userService.currentUserValue();
+    // this.loggedInUser = this.userService.currentUserValue();
     this.submitted = true;
     this.message.title = this.messageForm.controls.message_title.value;
     this.message.body = this.messageForm.controls.message_body.value;

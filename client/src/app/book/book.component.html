@@ -11,4 +11,33 @@
   <span class="price-section">
         <span class="price">{{book.isListed ? '$' + book.price : 'Not for sale'}}</span>
     </span>
+  <span (click)="updateBook(contentBook)">
+    <i class="fa fa-edit fa-2x" style="position:relative;color:grey;"></i>
+  </span>
 </a>
+
+<ng-template #contentBook let-modal>
+  <div class="modal-body">
+    <div class="bookform">
+      <form role="form" (submit)="onSubmit()" [formGroup]="bookForm" class="bookform-box">
+        <h1>Edit Book</h1>
+        <label for="title">Title</label>
+        <input type="text" [(ngModel)]="book.title"
+               class="title" id="title" name="title"
+               required  formControlName="title" >
+        <label for="authorName">Author Name</label>
+        <input type="text" [(ngModel)]="book.author"
+               class="authorName" id="authorName" name="authorName"
+               required  formControlName="author" >
+        <div>
+          <input type="checkbox" name="isListed"
+                 formControlName="isListed"  class="checkbox" (click)="onCheckboxClick($event)" [(ngModel)]="book.isListed"> List For sale
+        </div>
+        <label *ngIf=showTextBox>Price</label>
+        <input type="text" class="authorName" *ngIf=showTextBox [(ngModel)]="book.price" formControlName="price" >
+        <p id="insertinputs"></p>
+        <button type="submit"  class="submit">Submit</button>
+      </form>
+    </div>
+  </div>
+</ng-template>
