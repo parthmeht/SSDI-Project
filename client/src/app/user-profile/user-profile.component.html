@@ -2,14 +2,15 @@
   <div class="top-bar">
     <div class="info">
       <div class="name">{{isMyProfile ? 'My ' : user.name + '\'s'}} Profile</div>
-      <div class="email">{{user.email}}</div>
+      <div class="email">{{user.email}}</div>   
     </div>
+    
+    <button *ngIf="!this.isMyProfile && this.user.id!==this.loggedInUser.id" (click)="openModal(messageContent)">Send Message</button>
   </div>
   <div class="books">
     <div class="book-collection">
       <div class="header">
         <div class="title">Your Book Collection</div>
-        <button *ngIf="!this.isMyProfile && this.user.id!==this.loggedInUser.id" (click)="openModal(messageContent)">Send Message</button>
         <button class="add-button" (click)="openModal(contentBook)">Add</button>
       </div>
       <div class="header-two">
