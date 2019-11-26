@@ -26,6 +26,8 @@ import java.util.Date;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.MockitoAnnotations.initMocks;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
@@ -86,6 +88,14 @@ public class MessageControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.status").exists());
     }
 
+    @Test
+    public void getInboxMessageTest() throws Exception { 	
+    	this.mockMvc.perform(get("/getmessages/3"))
+        .andExpect(status().isOk())
+        .andExpect(content().contentType("application/json;charset=UTF-8"));  
+    }
+    
+    
     public static String asJsonString(final Object obj) {
         try {
             return new ObjectMapper().writeValueAsString(obj);

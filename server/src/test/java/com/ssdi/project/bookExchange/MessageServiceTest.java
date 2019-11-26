@@ -13,7 +13,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
@@ -27,6 +29,15 @@ public class MessageServiceTest {
     private MessageService messageServiceUnderTest;
     private Message message;
 
+    @Mock
+    User testUser;
+    
+    @Mock
+    User testUser2;
+    
+    @Mock
+    Message testMessage;
+    
     @Before
     public void setUp() {
         initMocks(this);
@@ -44,6 +55,7 @@ public class MessageServiceTest {
                 .email("testParth@test.com")
                 .build();
 
+        //	Do you want to set receiver id here ? Have set sender Id twice
         message = Message.builder()
                 .id(1)
                 .title("Buy Book")
@@ -62,4 +74,24 @@ public class MessageServiceTest {
         final Message result = messageServiceUnderTest.saveMessage(message);
         assertEquals(title, result.getTitle());
     }
+    
+    @Test
+    public void testGetInboxMessages() {
+    	
+    	List<Message> messageslist = new ArrayList<Message>();
+    	
+    	Mockito.when(testMessage.getCreatedDate()).thenReturn(new Timestamp((new Date()).getTime()));
+    	Mockito.when(testMessage.getSenderId()).thenReturn(testUser2);
+    	Mockito.when(testUser2.getName()).thenReturn("Koushik");
+    	Mockito.when(testMessage.getTitle()).thenReturn("Buy Book");
+    	Mockito.when(testMessage.getBody()).thenReturn("Hello, I would like to buy your Harry Potter Book");
+  
+    	messageslist.add(testMessage);
+    	Mockito.when(testMessage.getReceiverId()).thenReturn(testUser);
+    	Mockito.when(testUser.getId()).thenReturn(1);
+    	Mockito.when(mockMessageRepository.findAll()).thenReturn(messageslist);
+    	assertEquals("Buy Book", messageServiceUnderTest.getinboxmessages(1).get(0).getTitle());
+    }
+    
+    
 }

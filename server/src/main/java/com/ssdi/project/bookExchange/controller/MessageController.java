@@ -27,6 +27,6 @@ public class MessageController {
 
     @GetMapping("/getmessages/{userid}")
     public List<MessageVo> getinboxmessages(@PathVariable(value = "userid") int userId) {
-        return messageService.getinboxmessages(userId);
+    	return messageService.getinboxmessages(userId);
     }
 }
