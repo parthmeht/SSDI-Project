@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -36,7 +37,8 @@ public class MessageService {
             if(message.getReceiverId().getId() == userId) {
 
                 MessageVo mssageVo = new MessageVo();
-                mssageVo.setCreatedDate(message.getCreatedDate());
+                SimpleDateFormat formatter = new SimpleDateFormat("E, dd MMM yyyy HH:mm:ss z");
+                mssageVo.setCreatedDate(formatter.format(message.getCreatedDate()));
                 mssageVo.setSenderName(message.getSenderId().getName());
                 mssageVo.setTitle(message.getTitle());
                 mssageVo.setBody(message.getBody());

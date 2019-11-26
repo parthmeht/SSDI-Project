@@ -61,6 +61,7 @@ public class LoginController {
     public HashMap<String, Object> home(HttpServletRequest request){
         HashMap<String,Object> hm = new HashMap<>();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println(auth.getName());
         User user = userService.findUserByEmail(auth.getName());
         hm.put("message","Logged in successfully");
         hm.put("user",user);
