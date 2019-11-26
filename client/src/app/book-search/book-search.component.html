@@ -1,6 +1,6 @@
 <div class="book-search">
     <div class="search-box">
-        <input type="text" name="search" (keyup)="searchTerm.next($event.target.value)" [(ngModel)]="term" autocomplete="off" placeholder="Search for a Book..." type="search" />
+        <input type="text" name="search" (keyup)="searchTerm.next($event.target.value); search();" [(ngModel)]="term" autocomplete="off" placeholder="Search for a Book..." type="search" />
     </div>
     <div class="results">
             <div class="header">
@@ -20,7 +20,8 @@
                     <span class="edit-section"></span>
             </div>
         <div class="container">
-            <div class="no-books" *ngIf="term && (!results || !results.length)">No Books Found</div>
+            <div class="no-books" *ngIf="term && (!results || !results.length) && !searching">No Books Found</div>
+            <div class="no-books" *ngIf="term && (!results || !results.length) && searching">Searching...</div>
             <app-book class="books" *ngFor="let book of (term ? results : allBooks)" [book]="book" [fullView]="true"></app-book>
         </div>
     </div>

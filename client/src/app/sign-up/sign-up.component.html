@@ -5,27 +5,29 @@
                 </div>
                 <h1 class="title">UNC Charlotte Book Exchange</h1>    
         </div>
-        <form class="sign-up-box" (ngSubmit)="onSubmit()" [formGroup]="signUpForm">
-            <h2>Sign Up</h2>
-                <span><label>First Name</label><div *ngIf="submitted && f.firstName.errors" class="alert">First Name is Required</div></span>
-                <input formControlName="firstName" class="text-input" type="text" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" required />
-                
-                <span><label>Last Name</label><div *ngIf="submitted && f.lastName.errors" class="alert">Last Name is Required</div></span>
-                <input formControlName="lastName" class="text-input" type="text" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" required />
+        <div class="sign-up-box">
+            <form (ngSubmit)="onSubmit()" [formGroup]="signUpForm">
+                <h2>Sign Up</h2>
+                    <span><label>First Name</label><div *ngIf="submitted && f.firstName.errors" class="alert-error">First Name is Required</div></span>
+                    <input formControlName="firstName" class="text-input" type="text" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" required />
+                    
+                    <span><label>Last Name</label><div *ngIf="submitted && f.lastName.errors" class="alert-error">Last Name is Required</div></span>
+                    <input formControlName="lastName" class="text-input" type="text" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" required />
 
-                <span><label>Email</label><div *ngIf="submitted && f.email.errors" class="alert">Invalid Email</div></span>
-                <input formControlName="email" class="text-input" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" email required />
-                
-                <span><label>Phone Number</label><div *ngIf="submitted && f.phone.errors" class="alert">Invalid Number</div></span>
-                <input formControlName="phone" class="text-input" [ngClass]="{ 'is-invalid': submitted && f.phone.errors }" required />
+                    <span><label>Email</label><div *ngIf="submitted && f.email.errors" class="alert-error">Invalid Email</div></span>
+                    <input formControlName="email" class="text-input" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" email required />
+                    
+                    <span><label>Phone Number</label><div *ngIf="submitted && f.phone.errors" class="alert-error">Invalid Number</div></span>
+                    <input formControlName="phone" class="text-input" [ngClass]="{ 'is-invalid': submitted && f.phone.errors }" required />
 
-                <span><label>Password</label><div *ngIf="submitted && f.password.errors" class="alert">Invalid Password</div></span>
-                <input formControlName="password" class="text-input" type="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" required />
-                
-                <span><label>Confirm Password</label><div *ngIf="submitted && f.confirmPassword.errors" class="alert">Passwords Must Match</div></span>
-                <input formControlName="confirmPassword" class="text-input" type="password" [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" required />
+                    <span><label>Password</label><div *ngIf="submitted && f.password.errors" class="alert-error">Invalid Password</div></span>
+                    <input formControlName="password" class="text-input" type="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" required />
+                    
+                    <span><label>Confirm Password</label><div *ngIf="submitted && f.confirmPassword.errors" class="alert-error">Passwords Must Match</div></span>
+                    <input formControlName="confirmPassword" class="text-input" type="password" [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" required />
 
-                <button class="submit" type="submit">Submit</button>
+                    <button class="submit" type="submit">Submit</button>
+            </form>
             <div class="existing-account">Already have an account?&nbsp;<a routerLink="/login">Click here to log in</a></div>
-        </form>
+        </div>
     </div>

@@ -49,15 +49,14 @@ public class BookControllerTest {
             initMocks(this);
             this.mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
             bookServiceUnderTest = new BookService(mockBookRepository);
-            User user = User.builder()
-                    .id(1)
+            this.user = User.builder()
+                    .id(15)
                     .name("User")
                     .lastName("McGee")
                     .email("user@test234.com")
                     .build();
 
-            book = Book.builder().id(1).author("J K Rowling").title("Harry Potter").isListed(true).price(25.99).user(user).build();
-            bookController.createBook(1, book);
+            book = Book.builder().id(1).author("J K Rowling").title("Harry Potter").isListed(true).price(29.99).user(user).build();
         }catch(Exception e){
             System.out.println(e);
         }
@@ -66,7 +65,7 @@ public class BookControllerTest {
     @Test
     public void testSaveBook(){
         try {
-            mockMvc.perform(post("/user/1/addBook")
+            mockMvc.perform(post("/user/15/addBook")
                     .content(ToJSONString(book))
                     .contentType(MediaType.APPLICATION_JSON)
                     .accept(MediaType.APPLICATION_JSON))
@@ -80,7 +79,7 @@ public class BookControllerTest {
     public void testUpdateBook(){
         try {
             Book book2 = Book.builder().id(1).author("J K Rowling").title("Harry Potter 2").isListed(true).price(25.99).user(user).build();
-            mockMvc.perform(put("/updateBook/1")
+            mockMvc.perform(put("/updateBook/15")
                     .content(ToJSONString(book))
                     .contentType(MediaType.APPLICATION_JSON)
                     .accept(MediaType.APPLICATION_JSON))
@@ -103,7 +102,7 @@ public class BookControllerTest {
     @Test
     public void testBooksByUser(){
         try {
-            mockMvc.perform(get("/user/1/books"))
+            mockMvc.perform(get("/user/15/books"))
                     .andExpect(status().isOk());
         }catch(Exception e){
             System.out.println(e);

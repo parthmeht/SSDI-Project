@@ -13,13 +13,20 @@ export class BookSearchComponent implements OnInit {
   results: Book[];
   allBooks: Book[];
   searchTerm = new Subject<string>();
+  searching = false;
 
   constructor(private bookService: BookService) {
     this.bookService.search(this.searchTerm)
     .subscribe(results => {
       console.log(results);
       this.results = results;
+      this.searching = false;
     });
+ }
+
+ search(){
+   console.log('we searching');
+   this.searching = true;
  }
 
   ngOnInit() {

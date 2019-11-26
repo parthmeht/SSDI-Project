@@ -7,11 +7,11 @@
         </div>
         <div class="login-box">
             <h2>Log In</h2>
-          <form role="form" (submit)="onSubmit()">
-            <label>Email</label>
-            <input class="email" type="email" id="email" name="email" [(ngModel)]="credentials.email"/>
-            <label>Password</label>
-            <input class="password" type="password" id="password" name="password" [(ngModel)]="credentials.password"/>
+          <form role="form" (submit)="onSubmit()" [formGroup]="loginForm">
+            <span><label>Email</label><div *ngIf="submitted && f.email.errors" class="alert-error">Invalid Email</div></span>
+            <input formControlName="email" class="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" email required/>
+            <span><label>Password</label><div *ngIf="submitted && f.password.errors" class="alert-error">Invalid Password</div></span>
+            <input formControlName="password" class="password" type="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" required/>
             <input class="submit" type="submit"/>
           </form>
             <div class="new-here">New here?&nbsp;<a routerLink="/signup">Click here to sign up</a></div>

@@ -40,23 +40,36 @@
         padding:5vh;
         h2{
             margin-top:0;
-            margin-bottom:5vh;
+            margin-bottom:2vh;
             color:#509e2f;
             font-size:2.5vh;
             align-self:center;
         }
-        label{
-            font-size:2vh;
-        }
-        .email, .password{
-            background-color:#DFE6E9;
-            width:300px;
-            outline:none;
-            height:30px;
-            font-size:1.5vh;
-            margin-bottom:4vh;
-            border:1px solid #636E72;
-        }
+        form{
+            display:flex;
+            flex-direction:column;
+            label{
+                font-size:2vh;
+            }
+            
+            span{
+                display:flex;
+
+            }
+            .alert-error{
+                margin-top:auto;
+                margin-left:auto;
+                color:red;
+            }
+            .email, .password{
+                background-color:#DFE6E9;
+                width:300px;
+                outline:none;
+                height:30px;
+                font-size:1.5vh;
+                margin-bottom:4vh;
+                border:1px solid #636E72;
+            }
             .submit{
                 align-self:center;
                 width:150px;
@@ -70,6 +83,7 @@
                     box-shadow: 0px 2px 5px #636E72;
                 }
             }
+        }
         .new-here{
             margin-top:auto;
             display:flex;
