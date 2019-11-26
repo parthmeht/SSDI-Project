@@ -21,4 +21,15 @@ export class MessageService {
       }
     });
   }
+
+  public getinboxmessages() {
+    const url = this.messageUrl + 'getmessages/' + this.user.id;
+    console.log('Inside Message Service');
+    return this.http.get<any>(url,{
+      headers: {
+        authorization: 'Basic ' + this.user.authdata,
+      }
+    });
+
+  }
 }

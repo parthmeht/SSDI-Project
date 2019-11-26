@@ -35,7 +35,7 @@ import { UserTableComponent } from './user-table/user-table.component';
 import { UserListComponent } from './user-list/user-list.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {MessageService} from './service/message.service';
-//import { InboxComponent } from './inbox/inbox.component';
+import { InboxComponent } from './inbox/inbox.component';
 
 @Injectable()
 export class XhrInterceptor implements HttpInterceptor {
@@ -64,7 +64,8 @@ export class XhrInterceptor implements HttpInterceptor {
     UserSearchComponent,
     BookSearchComponent,
     UserTableComponent,
-    UserListComponent
+    UserListComponent,
+    InboxComponent
   ],
   imports: [
     BrowserModule,

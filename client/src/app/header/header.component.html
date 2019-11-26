@@ -1,17 +1,24 @@
 <div class="header">
-    <div class="row-one">
-        <a class="title-link" routerLink="">
-            <div class="image-container">
-                <img src="../../assets/images/books.png" />
-            </div>
-            <h1 class="title">UNC Charlotte Book Exchange</h1>
-        </a>
-        <!--<app-search class="search"></app-search>-->
-        <div class="user">
-            <a href="/user" class="user-name">Welcome, {{user.name}}</a>
-            <a [routerLink]="" (click)="logout()" class="logout">Logout</a>
-        </div>
+  <div class="row-one">
+    <a class="title-link" routerLink="">
+      <div class="image-container">
+        <img src="../../assets/images/books.png" />
+      </div>
+      <h1 class="title">UNC Charlotte Book Exchange</h1>
+    </a>
+
+    <a class="title-link" href="/inbox">
+      <div class="inbox-image-container">
+        <img src="../../assets/images/mail-inbox.png" />
+      </div>
+    </a>
+
+    <!--<app-search class="search"></app-search>-->
+    <div class="user">
+      <a href="/user" class="user-name">Welcome, {{user.name}}</a>
+      <a [routerLink]="" (click)="logout()" class="logout">Logout</a>
     </div>
-    <!-- placeholder for menu-->
-    <div class="row-two"></div>
+  </div>
+  <!-- placeholder for menu-->
+  <div class="row-two"></div>
 </div>
