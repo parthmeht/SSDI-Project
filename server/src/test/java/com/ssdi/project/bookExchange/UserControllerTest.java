@@ -19,6 +19,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
@@ -26,10 +28,13 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.hamcrest.Matchers.containsString;
 import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -55,8 +60,6 @@ public class UserControllerTest {
 
     private MockMvc mockMvc;
 
-    private HttpMessageConverter mappingJackson2HttpMessageConverter;
-
     @Autowired
     private WebApplicationContext webApplicationContext;
 
@@ -72,6 +75,7 @@ public class UserControllerTest {
                 .id(1)
                 .name("Gustavo")
                 .lastName("Ponce")
+                .password("password")
                 .email("test@test.com")
                 .build();
         user1 = User.builder()
@@ -90,22 +94,25 @@ public class UserControllerTest {
         users.add(user1);
         users.add(user2);
 
-        Mockito.when(mockUserRepository.save(any()))
+        when(mockUserRepository.save(any()))
                 .thenReturn(user);
-        Mockito.when(mockUserRepository.findByEmail(anyString()))
+        when(mockUserRepository.findByEmail(anyString()))
                 .thenReturn(user);
-        Mockito.when(mockUserRepository.getById(anyInt()))
+        when(mockUserRepository.getById(anyInt()))
                 .thenReturn(user);
-        Mockito.when(mockUserRepository.findAll())
+        when(mockUserRepository.findAll())
                 .thenReturn(users);
     }
 
     @Test
     public void createNewUserTest() throws Exception {
-        mockMvc.perform(post("/registration")
-                .content(ToJSONString(user))
+        this.mockMvc.perform( MockMvcRequestBuilders
+                .post("/registration")
+                .content(asJsonString(user))
                 .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.status").exists());
     }
 
     @Test
@@ -115,11 +122,9 @@ public class UserControllerTest {
                 .andExpect(content().contentType("application/json;charset=UTF-8"));
     }
 
-    public static String ToJSONString(final Object obj) {
+    public static String asJsonString(final Object obj) {
         try {
-            final ObjectMapper mapper = new ObjectMapper();
-            final String jsonContent = mapper.writeValueAsString(obj);
-            return jsonContent;
+            return new ObjectMapper().writeValueAsString(obj);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
