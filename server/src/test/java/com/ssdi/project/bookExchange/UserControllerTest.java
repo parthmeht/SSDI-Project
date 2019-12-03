@@ -57,7 +57,6 @@ public class UserControllerTest {
         obj_mapper = new ObjectMapper();
         this.mockMvc = MockMvcBuilders.standaloneSetup(loginController).build();
         authentication = Mockito.mock(Authentication.class);
-// Mockito.whens() for your authorization object
         securityContext = Mockito.mock(SecurityContext.class);
         Mockito.when(securityContext.getAuthentication()).thenReturn(authentication);
         SecurityContextHolder.setContext(securityContext);
@@ -88,8 +87,7 @@ public class UserControllerTest {
         Mockito.when(mockUserService.saveUser(any())).thenReturn(user);
         Mockito.when(mockUserService.listAll()).thenReturn(users);
         Mockito.when(mockUserService.getUserById(anyInt())).thenReturn(user);
-        Mockito.when(mockUserService.findUserByEmail(user.getEmail())).thenReturn(null);
-        Mockito.when(mockUserService.findUserByEmail(anyString())).thenReturn(null);
+        Mockito.when(mockUserService.findUserByEmail(anyString())).thenReturn(null,user);
     }
 
     @Test
