@@ -96,7 +96,7 @@ public class UserServiceTest {
     @Test
     public void testListAll(){
         List<User> al = userServiceUnderTest.listAll();
-
+        System.out.println(al.size());
         assertEquals(true,al.size()>0);
         assertEquals("Gustavo",al.get(0).getName());
         assertEquals("Parth",al.get(1).getName());
