@@ -4,18 +4,27 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ssdi.project.bookExchange.controller.BookController;
 import com.ssdi.project.bookExchange.model.Book;
 import com.ssdi.project.bookExchange.model.User;
+import com.ssdi.project.bookExchange.repository.BookRepository;
 import com.ssdi.project.bookExchange.service.BookService;
+import com.ssdi.project.bookExchange.service.UserService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.MockitoAnnotations.initMocks;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -23,97 +32,78 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class BookControllerTest {
+
     @Mock
-    private BookService mockBookService;
+    private BookRepository mockBookRepository;
+
+    private BookService bookServiceUnderTest;
+
     @InjectMocks
     private BookController bookController;
     private User user;
     private Book book;
+    private Book book2;
     private MockMvc mockMvc;
 
     @Before
     public void setUp() {
-        try {
-            initMocks(this);
-            this.mockMvc = MockMvcBuilders.standaloneSetup(bookController).build();
-            this.user = User.builder()
-                    .id(15)
-                    .name("User")
-                    .lastName("McGee")
-                    .email("user@test234.com")
-                    .build();
+        initMocks(this);
+        bookServiceUnderTest = new BookService(mockBookRepository);
 
-            book = Book.builder().id(1).author("J K Rowling").title("Harry Potter").isListed(true).price(29.99).user(user).build();
-        }catch(Exception e){
-            System.out.println(e);
-        }
+        List<Book> books = new ArrayList<>();
+
+        this.user = User.builder()
+                .id(15)
+                .name("User")
+                .lastName("McGee")
+                .email("user@test234.com")
+                .build();
+
+        book = Book.builder().id(1).author("J K Rowling").title("Harry Potter").isListed(true).price(29.99).user(user).build();
+        book2 = Book.builder().id(2).author("Test Author").title("Test Book").isListed(true).price(19.99).user(user).build();
+        books.add(book);
+        books.add(book2);
+
+        Mockito.when(mockBookRepository.save(any()))
+                .thenReturn(book);
+        Mockito.when(mockBookRepository.findByUserId(anyInt()))
+                .thenReturn(books);
+        Mockito.when(mockBookRepository.getById(anyInt()))
+                .thenReturn(book);
+        Mockito.when(mockBookRepository.findAll())
+                .thenReturn(books);
     }
 
     @Test
     public void testSaveBook(){
-        try {
-            mockMvc.perform(post("/user/15/addBook")
-                    .content(ToJSONString(book))
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .accept(MediaType.APPLICATION_JSON))
-                    .andExpect(status().isOk());
-        }catch(Exception e){
-            System.out.println(e);
-        }
+        final String title = "Harry Potter";
+        Book result = bookServiceUnderTest.saveBook(book);
+        assertEquals(title, result.getTitle());
     }
 
     @Test
-    public void testUpdateBook(){
-        try {
-            Book book2 = Book.builder().id(1).author("J K Rowling").title("Harry Potter 2").isListed(true).price(25.99).user(user).build();
-            mockMvc.perform(put("/updateBook/15")
-                    .content(ToJSONString(book))
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .accept(MediaType.APPLICATION_JSON))
-                    .andExpect(status().isOk());
-        }catch(Exception e){
-            System.out.println(e);
-        }
+    public void testGetBookById(){
+        final int id = 1;
+        Book result = bookServiceUnderTest.getBookById(id);
+        assertEquals(id, result.getId());
     }
 
     @Test
     public void testGetAllBooks(){
-        try {
-            mockMvc.perform(get("/books"))
-                    .andExpect(status().isOk());
-        }catch(Exception e){
-            System.out.println(e);
-        }
+        List<Book> bookList = bookServiceUnderTest.findAll();
+        System.out.println(bookList.size());
+        assertEquals(true,bookList.size()>0);
+        assertEquals("Harry Potter",bookList.get(0).getTitle());
+        assertEquals("Test Book",bookList.get(1).getTitle());
     }
 
     @Test
-    public void testBooksByUser(){
-        try {
-            mockMvc.perform(get("/user/15/books"))
-                    .andExpect(status().isOk());
-        }catch(Exception e){
-            System.out.println(e);
-        }
-    }
-
-    @Test
-    public void testSearchBooks(){
-        try {
-            mockMvc.perform(get("/book/search?query=book"))
-                    .andExpect(status().isOk());
-        }catch(Exception e){
-            System.out.println(e);
-        }
-    }
-
-    public static String ToJSONString(final Object obj) {
-        try {
-            final ObjectMapper mapper = new ObjectMapper();
-            final String jsonContent = mapper.writeValueAsString(obj);
-            return jsonContent;
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+    public void testFindByUserId(){
+        final int id = 15;
+        List<Book> bookList =  bookServiceUnderTest.getBookByUserId(id);
+        assertEquals(true,bookList.size()>0);
+        assertEquals("Harry Potter",bookList.get(0).getTitle());
+        assertEquals("Test Book",bookList.get(1).getTitle());
     }
 
 }
