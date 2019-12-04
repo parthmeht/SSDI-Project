@@ -1,16 +1,17 @@
 package com.ssdi.project.bookExchange;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ssdi.project.bookExchange.controller.MessageController;
 import com.ssdi.project.bookExchange.model.Message;
 import com.ssdi.project.bookExchange.model.User;
-import com.ssdi.project.bookExchange.repository.MessageRepository;
 import com.ssdi.project.bookExchange.service.MessageService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -19,15 +20,11 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
 
 import java.sql.Timestamp;
 import java.util.Date;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.MockitoAnnotations.initMocks;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
@@ -37,19 +34,18 @@ public class MessageControllerTest {
 
     private MockMvc mockMvc;
 
-    @Autowired
-    private WebApplicationContext webApplicationContext;
-
-    private MessageService messageServiceUnderTest;
     @Mock
-    private MessageRepository mockMessageRepository;
+    private MessageService mockMessageService;
+    @InjectMocks
+    private MessageController messageController;
+
     Message message;
     User user, user1;
 
     @Before
     public void setUp() {
-        initMocks(this);
-        this.mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
+        MockitoAnnotations.initMocks(this);
+        this.mockMvc = MockMvcBuilders.standaloneSetup(messageController).build();
         user = User.builder()
                 .id(1)
                 .name("Gustavo")
@@ -73,7 +69,7 @@ public class MessageControllerTest {
                 .senderId(user1)
                 .createdDate(new Timestamp((new Date()).getTime()))
                 .build();
-        Mockito.when(mockMessageRepository.save(any()))
+        Mockito.when(mockMessageService.saveMessage(any()))
                 .thenReturn(message);
     }
 
@@ -86,13 +82,6 @@ public class MessageControllerTest {
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.status").exists());
-    }
-
-    @Test
-    public void getInboxMessageTest() throws Exception { 	
-    	this.mockMvc.perform(get("/getmessages/3"))
-        .andExpect(status().isOk())
-        .andExpect(content().contentType("application/json;charset=UTF-8"));  
     }
     
     

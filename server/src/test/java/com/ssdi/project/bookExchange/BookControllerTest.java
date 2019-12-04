@@ -4,22 +4,17 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ssdi.project.bookExchange.controller.BookController;
 import com.ssdi.project.bookExchange.model.Book;
 import com.ssdi.project.bookExchange.model.User;
-import com.ssdi.project.bookExchange.repository.BookRepository;
 import com.ssdi.project.bookExchange.service.BookService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
-
-import java.nio.charset.Charset;
 
 import static org.mockito.MockitoAnnotations.initMocks;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -29,26 +24,18 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 public class BookControllerTest {
     @Mock
-    private BookService bookServiceUnderTest;
-    private BookRepository mockBookRepository;
+    private BookService mockBookService;
+    @InjectMocks
+    private BookController bookController;
     private User user;
     private Book book;
-    private Book bookTest;
-    private MediaType contentType = new MediaType(MediaType.APPLICATION_JSON.getType(),
-            MediaType.APPLICATION_JSON.getSubtype(), Charset.forName("utf8"));
     private MockMvc mockMvc;
-    private HttpMessageConverter mappingJackson2HttpMessageConverter;
-    @Autowired
-    private WebApplicationContext webApplicationContext;
-    @Mock
-    private BookController bookController;
 
     @Before
     public void setUp() {
         try {
             initMocks(this);
-            this.mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
-            bookServiceUnderTest = new BookService(mockBookRepository);
+            this.mockMvc = MockMvcBuilders.standaloneSetup(bookController).build();
             this.user = User.builder()
                     .id(15)
                     .name("User")
